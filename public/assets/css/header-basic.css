@@ -16,13 +16,13 @@
 
 .header-basic .header-limiter h1 {
 	float: left;
-	font: normal 28px Cookie, Arial, Helvetica, sans-serif;
-	line-height: 40px;
+	font: normal 84px Cookie, Arial, Helvetica, sans-serif;
+	line-height: 50px;
 	margin: 0;
 }
 
 .header-basic .header-limiter h1 span {
-	color: #5383d3;
+	color: #b68585;
 }
 
 /* The header links */
@@ -40,7 +40,7 @@
 
 .header-basic .header-limiter nav a{
 	display: inline-block;
-	padding: 0 5px;
+
 	text-decoration:none;
 	color: #ffffff;
 	font-size: 16px;
