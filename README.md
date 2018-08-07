@@ -12,6 +12,10 @@ User should login to app.
 
 User should add cost and article.
 
+User can edit profile.
+
+User can delete items.
+
 This app will help many people to organize their expenses.
 
 
