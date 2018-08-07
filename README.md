@@ -1,6 +1,6 @@
 # PeeX
 # Project Proposal
-## Personal expensess app
+## Personal expenses app
 
 Personal expenses app is a simple mobile app which can be used by everyone. This app will help users to follow all their expenses. User will add every article which is bought or any other type of expenses and at the end of month this app will sum all expenses and show them to users.
 
