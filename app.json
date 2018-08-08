@@ -1,0 +1,7 @@
+{
+    "name": "Personal Expenses App",
+    "description": "App for manage personal expenses",
+    "repository" : "https://github.com/DervisicBerina/PeeX.git",
+    "logo" : "http://node-js-sample.herokuapp.com/node.svg",
+    "keywords": ["node","express","static"]
+}
