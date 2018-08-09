@@ -36,4 +36,15 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/addExpenses',
             templateUrl: 'views/dashboard/addExpenses.html'
         });
+
+});
+app.controller('dashboardCtrl',function(){
+    console.log("Initializing dashboard");
+    md.initDashboardPageCharts();
+});
+app.controller('expensesCtrl',function($scope,$http){
+    $scope.myExpenses = [];
+   $http.get('/expenses').then(function(response){
+       $scope.myExpenses = response.data;
+   }) 
 });
