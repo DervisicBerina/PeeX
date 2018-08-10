@@ -24,9 +24,12 @@
               <tr>
 
                 <td><input class="form-control" </td>
-                <td><div class="dropdown">
-                  <select ng-model="selectedName" ng-options="x for x in category"></select>
-                </div>
+                <td>
+                 
+                    <tr ng-repeat="singleCategory in category">
+                        <td>
+                            {{singleCategory.category}}
+                        </td>
                   <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item">Rent</a>
                     <a class="dropdown-item">Utility bills</a>

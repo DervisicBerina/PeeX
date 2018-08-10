@@ -19,10 +19,10 @@
                           </thead>
                           <tbody>
                             <tr>
-                                <td><div class="dropdown">
-                                  <select ng-model="selectedName" ng-options="x for x in category"></select>
-                                    <button class="btn btn-info">Add New</button>
-                                  </div>
+                                <td>
+                                    <select style="-webkit-appearance: menulist;" ng-model="selectedName" ng-options="x.category for x in categoryList">
+                                        <option value="">  -- choose category --  </option>
+                                    </select>
                                 </td>
                                 
                                 <td><input class="form-control" </td>
