@@ -1,5 +1,4 @@
-
-        <div class="container-fluid">
+ <div class="container-fluid" ng-controller="recurringExpensesCtrl">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
@@ -22,18 +21,11 @@
                           <tbody>
                             <tr>
                                 <td><div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                                      Choose category
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <a class="dropdown-item">Rent</a>
-                                      <a class="dropdown-item">Utility bills</a>
-                                      <a class="dropdown-item">Bank fees</a>
-                                      <a class="dropdown-item">Debt payments</a>
-                                      <a class="dropdown-item">Other</a>
-                                    </div>
+                                  <select ng-model="selectedName" ng-options="x for x in category"></select>
+                                  
+                                  
                                     <button class="btn btn-info">Add New</button>
-                                    </div>
+                                  </div>
                                 </td>
                                 
                                 <td><input class="form-control" </td>

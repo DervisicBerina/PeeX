@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="addExpensesCtrl">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -25,28 +25,23 @@
 
                 <td><input class="form-control" </td>
                 <td><div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                    Choose category
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <select ng-model="selectedName" ng-options="x for x in category"></select>
+                </div>
+                  <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item">Rent</a>
                     <a class="dropdown-item">Utility bills</a>
                     <a class="dropdown-item">Bank fees</a>
                     <a class="dropdown-item">Debt payments</a>
                     <a class="dropdown-item">Other</a>
-                  </div>
+                  </div> -->
                 </td>
-
                 <td><input class="form-control" </td>
                 <td><input type="date" /></td>
                 <td><button class="btn btn-primary">Add</button></td>
                 <td><button class="btn btn-danger">Delete</button></td>
-                
               </tr>
-
               </tbody>
             </table>
-
           </div>
         </div>
       </div>
