@@ -14,8 +14,6 @@ app.get('/expenses', function(req,res){
     res.json(docs)
 })
 });
-
-
 app.get('/', (req, res) => res.sendStatus(200));
 app.listen(port,function(){
   console.log('Node app is running on port', port);
