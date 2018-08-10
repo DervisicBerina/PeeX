@@ -35,6 +35,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('dashboard.addExpenses', {
             url: '/addExpenses',
             templateUrl: 'views/dashboard/addExpenses.html'
+        })
+        .state('dashboard.categoryList', {
+            url: '/categoryList',
+            templateUrl: 'views/dashboard/categoryList.html'
         });
 
 });

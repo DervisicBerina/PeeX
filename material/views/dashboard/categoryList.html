@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-6" style="margin:auto;">
+        <div class="container-fluid">
+            <div ng-controller="categoryCtrl">
+
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Recurring Expenses List</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="singleCategory in categoryList">
+                                        <td>
+                                            {{$index + 1}}
+                                        </td>
+                                        <td>
+                                            {{singleCategory.category}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" style="margin:auto;">
+        <div ng-controller="nonrecuringCategoryCtrl">
+
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title ">Nonecurring Expenses List</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                                <th>ID</th>
+                                <th>Name</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="single in categoryList">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>
+                                        {{single.category}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <button ng-click="addCategory()" type="button" class="btn btn-primary" style="text-align:center;
+    margin:auto;">Add Category</button>
+
+
+</div>
