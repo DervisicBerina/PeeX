@@ -18,3 +18,7 @@ app.get('/', (req, res) => res.sendStatus(200));
 app.listen(port,function(){
   console.log('Node app is running on port', port);
 });
+
+// zadaca:
+// bootstrap modal dadati u formu i kad se protosne save da se posalju u bazu 
+// toaster
