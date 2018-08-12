@@ -64,7 +64,7 @@
         
     </div>
    
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"  style="text-align:center;
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"  style="text-align:center;
     margin:auto;">Add category</button>
 <div ng-controller="recurringExpensesCtrl" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -77,21 +77,21 @@
       </div>
       <div class="modal-body">
         <form>
-          <div class="form-group">
+          <div class="form-group" >
             <label  class="col-form-label">Type</label>
-            <select style="-webkit-appearance: menulist;" ng-model="selectedName" ng-options="x.type for x in categoryList | unique:'type'">
-                    <option value="">  -- choose category --  </option>
+            <select ng-model="category" style="-webkit-appearance: menulist;" ng-options="x.type for x in categoryList | unique:'type'">
+                    <option value="" >  -- choose category --  </option>
                 </select>
           </div>
           <div class="form-group">
-            <label class="col-form-label">Category:</label>
-            <textarea class="form-control"></textarea>
+            <label class="col-form-label" >Category:</label>
+            <textarea class="form-control" id="message-text" ng-model="category.category"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Add</button>
+        <button type="submit" id="submit" type="button" ng-click="submit()" class="btn btn-primary">Add</button>
       </div>
     </div>
   </div>

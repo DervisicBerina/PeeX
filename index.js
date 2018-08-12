@@ -14,6 +14,7 @@ app.get('/expenses', function (req, res) {
     res.json(docs)
   })
 });
+
 app.get('/category', function (req, res) {
   db.category.find(function (err, docs) {
     res.json(docs)
@@ -50,11 +51,10 @@ app.get('/category/nonrecurringType', function (req, res) {
 
 app.post('/category', function(req, res) {
   console.log(req.body);
-  db.category.insert(req.body, function(err, doc) {
-    res.json(doc);
+  db.category.insert(req.body, function(err, docs) {
+    res.json(docs);
   });
 });
-
 
 app.get('/', (req, res) => res.sendStatus(200));
 app.listen(port, function () {
