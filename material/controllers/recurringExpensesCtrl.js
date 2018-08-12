@@ -4,14 +4,18 @@ app.controller('recurringExpensesCtrl', function($scope,$http){
         $scope.categoryList = response.data;
         console.log(response.data);
     }) 
-    $scope.submit = function() {
+    
+    $scope.submit = function(){
         console.log($scope.category);
         $http.post('/category', $scope.category).then(function(response) {
-          console.log(response);
-        });
-
+            console.log(response);
+        },function(error) {
+            console.error(error)
+          });
       }
-})
+});
+
+
 app.filter('unique', function () {
 
     return function (items, filterOn) {
@@ -50,4 +54,3 @@ app.filter('unique', function () {
         return items;
     };
 });
-
