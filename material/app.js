@@ -1,4 +1,9 @@
 var app = angular.module("PeeXApp", ['ui.router','toastr', 'pathgather.popeye']);
+
+
+// app.
+// app.;
+
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
 
@@ -30,18 +35,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('dashboard.recurringExpenses', {
             url: '/recurringExpenses',
-            templateUrl: 'views/dashboard/recurringExpenses.html'
+            templateUrl: 'views/dashboard/recurringExpenses.html',
+            controller: ('expensesCtrl',expensesCtrl)
         })
         .state('dashboard.addExpenses', {
             url: '/addExpenses',
-            templateUrl: 'views/dashboard/addExpenses.html'
+            templateUrl: 'views/dashboard/addExpenses.html',
+           controller: ('addExpensesCtrl',addExpensesCtrl)
         })
         .state('dashboard.categoryList', {
             url: '/categoryList',
-            templateUrl: 'views/dashboard/categoryList.html'
+            templateUrl: 'views/dashboard/categoryList.html',
+            controller: ('categoryCtrl',categoryCtrl)
         });
-
+     
 });
+
 app.controller('dashboardCtrl',function(){
     console.log("Initializing dashboard");
 //     <script>
@@ -52,3 +61,5 @@ app.controller('dashboardCtrl',function(){
 // </script>
     md.initDashboardPageCharts();
 });
+
+

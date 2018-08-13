@@ -1,9 +1,9 @@
- <div class="container-fluid" ng-controller="recurringExpensesCtrl">
+ <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">Recurring Expenses</h4>
+                  <h4 class="card-title ">Expenses</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
@@ -11,6 +11,7 @@
                           <thead>
                             <tr>
                               <th scope="col">Category</th>
+                              <th scope="col">Name</th>
                               <th scope="col">Cost</th>
                               <th scope="col">Recurring Date</th>
                               <th scope="col">&nbsp</th>
@@ -23,13 +24,12 @@
                                     <select style="-webkit-appearance: menulist;" ng-model="selectedName" ng-options="x.category for x in categoryList">
                                         <option value="">  -- choose category --  </option>
                                     </select>
-
                                 </td>
-                                
-                                <td><input class="form-control" </td>
-                                <td><input type="date" /></td>
-                                <td><button class="btn btn-primary">Add</button></td>
-                                <td><button class="btn btn-danger">Delete</button></td>
+                                <td><input class="form-control" ng-model="nameExpense"></td>
+                                <td><input class="form-control" ng-model="costValue"></td>
+                                <td><input type="date" ng-model="date"></td>
+                                <td><button class="btn btn-primary" ng-click="addExpense()">Add</button></td>
+                                <td><button class="btn btn-danger" ng-click="deleteExpense()">Delete</button></td>
                             </tr>
                           </tbody>
                         </table>

@@ -1,6 +1,7 @@
-app.controller('expensesCtrl',function($scope,$http){
-    $scope.myExpenses = [];
-   $http.get('/expenses').then(function(response){
-       $scope.myExpenses = response.data;
+function expensesCtrl($scope,$http){
+    $scope.categoryList = [];
+   $http.get('/category').then(function(response){
+       $scope.categoryList = response.data;
    }) 
-}); 
+   
+} 

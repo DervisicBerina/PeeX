@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('localhost:27017/peex', ['expenses']);
+var db = mongojs('localhost:27017/peex', ['expenses','category']);
 var body_parser = require('body-parser');
 app.use(body_parser.json());
 
@@ -21,33 +21,33 @@ app.get('/category', function (req, res) {
   })
 });
 
-app.get('/category/recurringType', function (req, res) {
-  db.category.aggregate(
-    [{ $match: { type: "recurring expenses" } }
-    ], function (err, docs) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.json(docs);
-      }
-    }
-  );
-});
+// app.get('/category/recurringType', function (req, res) {
+//   db.category.aggregate(
+//     [{ $match: { type: "recurring expenses" } }
+//     ], function (err, docs) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       else {
+//         res.json(docs);
+//       }
+//     }
+//   );
+// });
 
-app.get('/category/nonrecurringType', function (req, res) {
-  db.category.aggregate(
-    [{ $match: { type: "nonrecurring expenses" } }
-    ], function (err, docs) {
-      if (err) {
-        console.log(err);
-      }
-      else {
-        res.json(docs);
-      }
-    }
-  );
-});
+// app.get('/category/nonrecurringType', function (req, res) {
+//   db.category.aggregate(
+//     [{ $match: { type: "nonrecurring expenses" } }
+//     ], function (err, docs) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       else {
+//         res.json(docs);
+//       }
+//     }
+//   );
+// });
 
 app.post('/category', function(req, res) {
   console.log(req.body);
