@@ -79,13 +79,13 @@
         <form>
           <div class="form-group" >
             <label  class="col-form-label" id="selectedName">Type</label>
-        <select ng-model="category" style="-webkit-appearance: menulist;" ng-options="x.type for x in categoryList | unique:'type'" >
+        <select ng-model="categoryType" style="-webkit-appearance: menulist;" ng-options="x.type for x in categoryList | unique:'type'" >
                     <option value="">-- choose category --</option>
             </select>
           </div>
           <div class="form-group">
             <label class="col-form-label" >Category:</label>
-            <textarea class="form-control" id="message-text" ng-model="category.category"></textarea>
+            <textarea class="form-control" id="message-text" ng-model="categoryName"></textarea>
           </div>
         </form>
       </div>

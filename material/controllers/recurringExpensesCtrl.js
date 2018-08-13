@@ -1,13 +1,17 @@
 app.controller('recurringExpensesCtrl', function($scope,$http){
     $scope.categoryList = [];
+    $scope.categoryType;
+    $scope.categoryName;
+    $scope.newCategory = {category:'', type:''};
     $http.get('/category').then(function(response){
         $scope.categoryList = response.data;
         console.log(response.data);
     }) 
     
     $scope.submit = function(launch_toast) {
-        console.log($scope.category)
-        $http.post('/category', $scope.category).then(function(response){
+        $scope.newCategory.category = $scope.categoryName;
+        $scope.newCategory.type = $scope.categoryType.type;
+        $http.post('/category', $scope.newCategory).then(function(response){
             console.log("added");
             console.log(response);
             var x = document.getElementById("toast")
