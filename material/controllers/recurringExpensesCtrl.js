@@ -1,26 +1,30 @@
 app.controller('recurringExpensesCtrl', function($scope,$http,toastr){
+    
     $scope.categoryList = [];
-    $scope.categoryType;
+    // $scope.categoryType;
     $scope.categoryName;
     $scope.newCategory = {category:'', type:''};
+
     $http.get('/category').then(function(response){
         $scope.categoryList = response.data;
         console.log(response.data);
-    }) 
+    })
     $scope.submit = true;
+
     $scope.submit = function() {
         $scope.newCategory.category = $scope.categoryName;
-        $scope.newCategory.type = $scope.categoryType.type;
+        // $scope.newCategory.type = $scope.categoryType.type;
         $http.post('/category', $scope.newCategory).then(function successCallback(response){
             console.log("added");
             console.log(response);
+            window.location.reload();// pozovi categoryCtrk.reloadCategories
            toastr.success("added");
-           
         },function errorCallback(response) {
             alert("error");
           });
        
-      }
+         
+    }
 });
 app.filter('unique', function () {
 

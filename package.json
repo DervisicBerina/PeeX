@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/DervisicBerina/PeeX#readme",
   "dependencies": {
+    "angular-popeye": "^1.0.5",
     "angular-toastr": "^2.1.1",
     "angularjs-toast": "^1.0.16",
     "body-parser": "^1.18.3",

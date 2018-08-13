@@ -1,12 +1,18 @@
 app.controller('categoryCtrl',function($scope,$http){
     $scope.categoryList = [];
-   $http.get('/category/recurringType').then(function(response){
+   $http.get('/category').then(function(response){
        $scope.categoryList = response.data;
    }) 
 });
 app.controller('nonrecuringCategoryCtrl',function($scope,$http){
     $scope.categoryList = [];
    $http.get('/category/nonrecurringType').then(function(response){
+       $scope.categoryList = response.data;
+   }) 
+});
+app.controller('nonrecuringCategoryCtrl',function($scope,$http){
+    $scope.categoryList = [];
+   $http.get('/category').then(function(response){
        $scope.categoryList = response.data;
    }) 
 });
