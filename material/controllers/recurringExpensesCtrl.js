@@ -1,4 +1,4 @@
-app.controller('recurringExpensesCtrl', function($scope,$http){
+app.controller('recurringExpensesCtrl', function($scope,$http,toastr){
     $scope.categoryList = [];
     $scope.categoryType;
     $scope.categoryName;
@@ -7,27 +7,21 @@ app.controller('recurringExpensesCtrl', function($scope,$http){
         $scope.categoryList = response.data;
         console.log(response.data);
     }) 
-    
-    $scope.submit = function(launch_toast) {
+    $scope.submit = true;
+    $scope.submit = function() {
         $scope.newCategory.category = $scope.categoryName;
         $scope.newCategory.type = $scope.categoryType.type;
-        $http.post('/category', $scope.newCategory).then(function(response){
+        $http.post('/category', $scope.newCategory).then(function successCallback(response){
             console.log("added");
             console.log(response);
-            var x = document.getElementById("toast")
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+           toastr.success("added");
+           
         },function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+            alert("error");
           });
        
-            
-        
       }
-    
-    
-})
+});
 app.filter('unique', function () {
 
     return function (items, filterOn) {

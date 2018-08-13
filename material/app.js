@@ -1,4 +1,4 @@
-var app = angular.module("PeeXApp", ['ui.router']);
+var app = angular.module("PeeXApp", ['ui.router','toastr']);
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
 
