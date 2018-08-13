@@ -1,8 +1,13 @@
+<head>
+        <script src="assets/release/popeye.js"></script>
+        <link rel="stylesheet" href="assets/release/popeye.css" />
+    
+</head>
+
 <div class="row">
     <div class="col-md-12" style="margin:auto;">
         <div class="container-fluid">
             <div ng-controller="categoryCtrl">
-
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <div class="row">
@@ -10,11 +15,25 @@
                                 <h4 class="card-title ">Category</h4>
                             </div>
                             <div class="col-sm-2">
-                                <button type="button" class="btn btn-primary" style="text-align:right !important;" data-toggle="modal" data-target="#exampleModal">Add category
+                                <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-click="open()">Add category
                                 <i class="fa fa-plus-circle" aria-hidden="true"></i></button>
                             </div>
                         </div>
                     </div>
+                    <div class="popeye-modal-container" ng-show="visible">
+            
+                            <div class="popeye-modal">
+                              <a class="popeye-close-modal" href ng-click="close()"></a>
+                              <form>
+                                    <div class="form-group">
+                                        <label class="col-form-label">Category:</label>
+                                        <textarea class="form-control" id="message-text" ng-model="categoryName"></textarea>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" ng-click="close()">Close</button>
+                                    <button type="submit" type="button" ng-click="submit()" class="btn btn-primary" >Add</button>
+                                </form>
+                            </div>
+                          </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
@@ -39,6 +58,7 @@
             </div>
         </div>
     </div>
+    <!-- 
     <div ng-controller="recurringExpensesCtrl" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -60,11 +80,11 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" type="button" ng-click="submit()" class="btn btn-primary" data-dismiss="modal">Add</button>
-                    <!-- <div id="toast"><div id="img">Icon</div><div id="desc">Category added</div></div> -->
+                    <!-- <div id="toast"><div id="img">Icon</div><div id="desc">Category added</div></div> --
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 </div>
 </div>
