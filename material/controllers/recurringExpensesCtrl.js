@@ -5,17 +5,25 @@ app.controller('recurringExpensesCtrl', function($scope,$http){
         console.log(response.data);
     }) 
     
-    $scope.submit = function(){
-        console.log($scope.category);
-        $http.post('/category', $scope.category).then(function(response) {
+    $scope.submit = function(launch_toast) {
+        console.log($scope.category)
+        $http.post('/category', $scope.category).then(function(response){
+            console.log("added");
             console.log(response);
-        },function(error) {
-            console.error(error)
+            var x = document.getElementById("toast")
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        },function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
           });
+       
+            
+        
       }
-});
-
-
+    
+    
+})
 app.filter('unique', function () {
 
     return function (items, filterOn) {
