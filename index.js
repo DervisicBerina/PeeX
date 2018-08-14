@@ -9,16 +9,21 @@ var port = process.env.PORT || 5000
 
 app.use(express.static(__dirname + '/material'));
 
-app.get('/expenses', function (req, res) {
-  db.expenses.find(function (err, docs) {
+
+ app.get('/expenses', function (req, res) {
+   db.expenses.find(function (err, docs) {
     res.json(docs)
   })
-});
+ });
 
 app.get('/category', function (req, res) {
-  db.category.find(function (err, docs) {
+  db.category.aggregate([
+    {$project:{_id:0, category:1}}
+    
+    ],(function (err, docs) {
     res.json(docs)
   })
+);
 });
 
 app.post('/expenses',function(req,res){
@@ -35,6 +40,16 @@ app.post('/category', function(req, res) {
   });
 
 });
+app.delete('/expenses/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.expenses.remove({
+    _id: mongojs.ObjectId(id)
+  }, function(err, doc) {
+    res.json(doc);
+  })
+});
+
 
 app.get('/', (req, res) => res.sendStatus(200));
 app.listen(port, function () {

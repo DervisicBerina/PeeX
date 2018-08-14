@@ -16,19 +16,28 @@ $scope.close = function () {
     $scope.visible = $scope.visible = false;
 }
 
+$http.get('/category').then(function(response){
+    $scope.categoryList = response.data;
+    console.log(response.data);
+}) 
+
 $scope.add = function(){
  $http.post('/expenses', $scope.expense).then(function successCallback(response) {
-     $scope.expense = response.data;
+  
+    $scope.expense = response.data;
      console.log($scope.expense);
-        
         toastr.success("Successfully added");
-        // window.location.reload();
-        // pozovi categoryCtrk.reloadCategories
     });
 
     $scope.close();
    refresh();
 }
 refresh();
-
+$scope.deleteExpense = function(id) {
+    console.log(id);
+    $http.delete('/expenses/' + id ).then(function(response) {
+      console.log("deleted");
+      refresh();
+    });
+  };
 }

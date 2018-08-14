@@ -3,72 +3,83 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header card-header-primary">
-                        <div class="row">
-                                <div class="col-sm-10">
-                                    <h4 class="card-title ">Category</h4>
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-click="open()">Add expense
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                   
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h4 class="card-title ">Category</h4>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-click="open()">Add expense
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="popeye-modal-container" ng-show="visible">
 
-                        <div class="popeye-modal">
-                            <a class="popeye-close-modal" href ng-click="close()"></a>
-                            <form>
+                    <div class="popeye-modal">
+                        <a class="popeye-close-modal" href ng-click="close()"></a>
+                        <form>
 
-                                <div class="form-group">
-                                    <label class="col-form-label">Name:</label>
-                                    <textarea class="form-control" id="message-text" name ="name" ng-model="expense.name"></textarea>
-                                </div>
-                                <div class="form-group">
-                                        <label class="col-form-label">Cost:</label>
-                                        <textarea class="form-control" id="message-text" name = "cost" ng-model="expense.cost"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                            <label class="col-form-label">Type:</label>
-                                            <textarea class="form-control" id="message-text" name="type" ng-model="expense.type"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                                <label class="col-form-label">Date:</label>
-                                                <textarea class="form-control" id="message-text" name="date" ng-model="expense.date"></textarea>
-                                            </div>
-                                <button type="button" class="btn btn-secondary" ng-click="close()">Close</button>
-                                <button type="submit" type="button" ng-click="add()" class="btn btn-primary">Add</button>
-                            </form>
-                        </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Name:</label>
+                                <textarea class="form-control" id="message-text" name="name" ng-model="expense.name"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Cost:</label>
+                                <textarea class="form-control" id="message-text" name="cost" ng-model="expense.cost"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <select style="-webkit-appearance: menulist;" ng-model="expense.type" ng-options="x.category for x in categoryList">
+                                    <option value=""> -- choose category -- </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Date:</label>
+                                <textarea class="form-control" id="message-text" name="date" ng-model="expense.date"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-secondary" ng-click="close()">Close</button>
+                            <button type="submit" type="button" ng-click="add()" class="btn btn-primary">Add</button>
+                        </form>
                     </div>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class=" text-primary">
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Cost</th>
-                            <th>Type</th>
-                            <th>Date</th></thead>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Cost</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>&nbsp</th>
+                                <th>&nbsp</th>
+                            </thead>
                             <tbody>
-                            <tr ng-repeat="singleExpense in myExpenses">
-                                <td>
-                                    {{$index + 1}}
-                                </td>
-                                <td>
-                                    {{singleExpense.name}}
-                                </td>
-                                <td>
-                                   {{singleExpense.cost + ' $'}}  
-                                </td>
-                                <td>
-                                  {{singleExpense.category}}
-                                </td>
-                                <td>
-                                    {{singleExpense.date}}
-                                </td>
+                                <tr ng-repeat="singleExpense in myExpenses">
+                                    <td>
+                                        {{$index + 1}}
+                                    </td>
+                                    <td>
+                                        {{singleExpense.name}}
+                                    </td>
+                                    <td>
+                                        {{singleExpense.cost + ' $'}}
+                                    </td>
+                                    <td>
+                                        {{singleExpense.type}}
+                                    </td>
+                                    <td>
+                                        {{singleExpense.date}}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger" ng-click="deleteExpense(singleExpense._id)">Delete</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning" ng-click="editExpense(singleExpense._id)">Edit</button>
+                                    </td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>
