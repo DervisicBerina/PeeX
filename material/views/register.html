@@ -15,13 +15,13 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" ng-model="person.username">
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control">
+                          <input type="email" class="form-control"  ng-model="person.email">
                         </div>
                       </div>
                     </div>
@@ -29,24 +29,24 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Fist Name</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" ng-model="person.firstname">
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Last Name</label>
-                          <input type="text" class="form-control">
+                          <input type="text" class="form-control" ng-model="person.lastname">
                         </div>
                       </div>
                       <div class="col-md-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">Password</label>
-                            <input type="password" class="form-control">
+                            <input type="password" class="form-control" ng-model="person.password">
                           </div>
                         </div>
                     </div>
                   </form>
-                  <a href="#!dashboard"><button type="submit" class="btn btn-primary pull-right">Register</button></a>
+                  <a href="#!dashboard"><button type="submit" class="btn btn-primary pull-right" ng-click="register()">Register</button></a>
                 </div>
               </div>
             </div>

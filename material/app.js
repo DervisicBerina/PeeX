@@ -1,9 +1,4 @@
 var app = angular.module("PeeXApp", ['ui.router','toastr', 'pathgather.popeye']);
-
-
-// app.
-// app.;
-
 app.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
 
@@ -14,7 +9,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('register', {
             url: '/register',
-            templateUrl: 'views/register.html'
+            templateUrl: 'views/register.html',
+            controller: ('register', register)
         })
         .state('dashboard', {
             url: '/dashboard',
@@ -32,7 +28,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('dashboard.user', {
             url: '/user',
-            templateUrl: 'views/dashboard/user.html'
+            templateUrl: 'views/dashboard/user.html',
+            // controller: ('editUser',editUser)
         })
         .state('dashboard.recurringExpenses', {
             url: '/recurringExpenses',

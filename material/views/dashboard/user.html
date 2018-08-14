@@ -12,13 +12,13 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Username</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" ng-model="user.username">
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Email address</label>
-                  <input type="email" class="form-control">
+                  <input type="email" class="form-control" ng-model="user.email">
                 </div>
               </div>
             </div>
@@ -26,31 +26,26 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label class="bmd-label-floating">Fist Name</label>
+                  <input type="text" class="form-control" ng-model="user.firstname">
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="bmd-label-floating" ng-model="user.lastname">Last Name</label>
                   <input type="text" class="form-control">
                 </div>
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label class="bmd-label-floating">Last Name</label>
-                  <input type="text" class="form-control">
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <label class="bmd-label-floating">Password</label>
+                  <label class="bmd-label-floating" ng-model="user.password">Password</label>
                   <input type="password" class="form-control">
                 </div>
               </div>
             </div>
-            <div class="col-md-12">
-              <div class="form-group">
-                <label class="bmd-label-floating">Re-Type Password</label>
-                <input type="password" class="form-control">
-              </div>
-            </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+      <button type="submit" ng-click="update()" class="btn btn-primary pull-right">Update Profile</button>
+      <button type="submit" ng-click="editUser()" class="btn btn-primary pull-right">Edit Profile</button>
       <div class="clearfix"></div>
       </form>
     </div>
