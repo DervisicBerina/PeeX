@@ -17,9 +17,16 @@ app.use(express.static(__dirname + '/material'));
  });
 
 app.get('/category', function (req, res) {
-  db.category.find({},{ _id:0}).toArray(function (err, array) {
-    res.json(array)
-  })
+  db.category.aggregate([
+
+    {$project:{_id:0, category:1}}
+    
+    ],
+    (function (err, doc) {
+      res.json(doc)
+    })
+  );
+    
 });
 app.get('/users', function (req, res) {
   db.users.find(function (err, docs) {
@@ -70,7 +77,7 @@ app.post('/category', function(req, res) {
 });
 app.delete('/expenses/:id', function(req, res) {
   var id = req.params.id;
-  console.log(id);
+  console.log("deleting expense with id: ",id);
   db.expenses.remove({
     _id: mongojs.ObjectId(id)
   }, function(err, doc) {

@@ -1,11 +1,26 @@
 function expensesCtrl($scope, $http, toastr) {
     console.log("adsdsa");
+
     $scope.myExpenses = [];
-    var refresh = function () {
+    $scope.selectedCategory;
+    $scope.expense;
+    $scope.addButtonVisible = false;
+
+    $scope.hideAddButton = function () {
+        $scope.addButtonVisible = false;
+    }
+    $scope.showAddButton = function () {
+        $scope.addButtonVisible = true;
+    }
+    $scope.refresh = function () {
+        $scope.loadExpenses();
+    }
+    $scope.loadExpenses = function () {
         $http.get('/expenses').then(function (response) {
             $scope.myExpenses = response.data;
         });
     }
+
     $scope.open = function () {
         $scope.visible = false;
         $scope.visible = $scope.visible = true;
@@ -18,43 +33,40 @@ function expensesCtrl($scope, $http, toastr) {
 
     $http.get('/category').then(function (response) {
         $scope.categoryList = response.data;
-        console.log(response.data);
     })
 
     $scope.add = function () {
-        $http.post('/expenses', $scope.expense).then(function successCallback(response) {
+        $scope.expense.type = $scope.selectedCategory.category;
 
+        $http.post('/expenses', $scope.expense).then(function successCallback(response) {
             $scope.expense = response.data;
-            console.log($scope.expense);
             toastr.success("Successfully added!");
         });
 
         $scope.close();
-        refresh();
+        $scope.refresh();
     }
-    refresh();
-    $scope.deleteExpense = function (id) {
-        console.log(id);
-        $http.delete('/expenses/' + id).then(function (response) {
-            refresh();
-            toastr.error('Deleted expense');
-        });
 
+    $scope.deleteExpense = function (id) {
+        $http.delete('/expenses/' + id).then(function (response) {
+            $scope.refresh();
+            toastr.error('Deleted expense');
+        }
+        );
     };
+
     $scope.editExpense = function (id) {
-        console.log(id);
         $http.get('/expenses/' + id).then(function (response) {
-            $scope.expense = response;
+            $scope.expense = response.data;
         });
     };
     $scope.update = function () {
-        console.log($scope.expense._id);
         $http.put('/expenses/' + $scope.expense._id, $scope.expense).then(function (response) {
-            $scope.expense.name = ''
-            $scope.expense.cost = ''
-            $scope.expense.type = ''
-            $scope.expense.date = ''
-            // refresh();
+            $scope.refresh();
+            toastr.info("Expenses updated!");
         });
     };
+
+    $scope.loadExpenses();
+
 }
