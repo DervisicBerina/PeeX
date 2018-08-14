@@ -1,9 +1,12 @@
-function categoryCtrl($scope, $http,toastr){
+function categoryCtrl($scope, $http, toastr) {
 
     $scope.categoryList = [];
-    $http.get('/category').then(function (response) {
-        $scope.categoryList = response.data;
-    })
+    var refresh = function () {
+        $http.get('/category').then(function (response) {
+            $scope.categoryList = response.data;
+        });
+    }
+    refresh();
     $scope.open = function () {
         $scope.visible = false;
         $scope.visible = $scope.visible = true;
@@ -23,14 +26,13 @@ function categoryCtrl($scope, $http,toastr){
             console.log("added");
             console.log(response);
             toastr.success("Successfully added");
-            
             // window.location.reload();
             // pozovi categoryCtrk.reloadCategories
-        
         }, function errorCallback(response) {
             alert("error");
         });
-    $scope.close();
-   
+        $scope.close();
+        refresh();
+
     }
 }

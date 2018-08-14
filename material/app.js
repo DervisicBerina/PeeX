@@ -27,7 +27,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('dashboard.tables', {
             url: '/tables',
-            templateUrl: 'views/dashboard/tables.html'
+            templateUrl: 'views/dashboard/tables.html',
+            controller:('expensesCtrl',expensesCtrl)
         })
         .state('dashboard.user', {
             url: '/user',

@@ -21,33 +21,12 @@ app.get('/category', function (req, res) {
   })
 });
 
-// app.get('/category/recurringType', function (req, res) {
-//   db.category.aggregate(
-//     [{ $match: { type: "recurring expenses" } }
-//     ], function (err, docs) {
-//       if (err) {
-//         console.log(err);
-//       }
-//       else {
-//         res.json(docs);
-//       }
-//     }
-//   );
-// });
-
-// app.get('/category/nonrecurringType', function (req, res) {
-//   db.category.aggregate(
-//     [{ $match: { type: "nonrecurring expenses" } }
-//     ], function (err, docs) {
-//       if (err) {
-//         console.log(err);
-//       }
-//       else {
-//         res.json(docs);
-//       }
-//     }
-//   );
-// });
+app.post('/expenses',function(req,res){
+  console.log(req.body);
+  db.expenses.insert(req.body, function(err,docs){
+  res.json(docs);
+  })
+});
 
 app.post('/category', function(req, res) {
   console.log(req.body);
