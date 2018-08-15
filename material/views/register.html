@@ -4,25 +4,31 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-8">
-              <div class="card">
+              <div class="card" >
                 <div class="card-header card-header-primary">
                   <h4 class="card-title">Register</h4>
                 </div>
                 <div class="card-body">
-                  <form>
+                  <form name="register_form">
                     <div class="row">
 
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control" ng-model="person.username">
+                          <label class="bmd-label-floating">username</label>
+                          <input type="text" name="username" class="form-control" ng-model="person.username" required>
+                          <span style="color:#d32f2f" ng-show="register_form.username.$touched && register_form.username.$invalid"></span>
+                          <span ng-show="register_form.username.$error.required">username required.</span>
                         </div>
                       </div>
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control"  ng-model="person.email">
-                        </div>
+                            <label class="bmd-label-floating">Email</label>
+                          <input type="email" name="email" ng-model="person.email" class="form-control" required>
+                          <span style="color:#d32f2f" ng-show="register_form.email.$touched && register_form.email.$invalid">
+                          <span ng-show="register_form.email.$error.required">email required.</span>
+                          <span ng-show="register_form.email.$error.email">Email not valid.</span>
+                          </span>
+                          </div>
                       </div>
                     </div>
                     <div class="row">
@@ -41,12 +47,14 @@
                       <div class="col-md-12">
                           <div class="form-group">
                             <label class="bmd-label-floating">Password</label>
-                            <input type="password" class="form-control" ng-model="person.password">
+                            <input name="password" type="password" class="form-control" ng-model="person.password" required>
+                          <span style="color:#d32f2f" ng-show="register_form.password.$touched && register_form.password.$invalid"></span>
+                          <span ng-show="register_form.password.$error.required">password required.</span>
                           </div>
                         </div>
                     </div>
                   </form>
-                  <a href="#!dashboard"><button type="submit" class="btn btn-primary pull-right" ng-click="register()">Register</button></a>
+                  <a href="#!dashboard/charts"><button type="submit" class="btn btn-primary pull-right" ng-disabled="register_form.$invalid" ng-click="register()" >Register</button></a>
                 </div>
               </div>
             </div>

@@ -44,7 +44,7 @@ function expensesCtrl($scope, $http, toastr) {
         });
 
         $scope.close();
-        $scope.refresh();
+        $scope.loadExpenses();
     }
 
     $scope.deleteExpense = function (id) {

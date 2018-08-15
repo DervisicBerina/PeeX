@@ -41,7 +41,7 @@
                             </div>
                             <button type="button" class="btn btn-secondary" ng-click="close()">Close</button>
                             <button type="submit" type="button" ng-click="add()" ng-if="addButtonVisible" class="btn btn-primary">Add</button>
-                             <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-if="!addButtonVisible" ng-click="update();close()">Update
+                            <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-if="!addButtonVisible" ng-click="update();close()">Update
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </form>
@@ -57,7 +57,7 @@
                                 <th>Type</th>
                                 <th>Date</th>
                                 <th>Actions</th>
-                                
+
                             </thead>
                             <tbody>
                                 <tr ng-repeat="singleExpense in myExpenses">
@@ -77,10 +77,12 @@
                                         {{singleExpense.date}}
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger" ng-click="deleteExpense(singleExpense._id)">Delete</button>
-                                        <button class="btn btn-warning" ng-click="editExpense(singleExpense._id); open();hideAddButton()">Edit</button>
+                                        <div class="btn-group">
+                                            <button class="btn btn-danger" ng-click="deleteExpense(singleExpense._id)">Delete</button>
+                                            <button class="btn btn-warning" ng-click="editExpense(singleExpense._id); open();hideAddButton()">Edit</button>
+                                        </div>
                                     </td>
-                                    
+
                                 </tr>
 
                             </tbody>
