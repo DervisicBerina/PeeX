@@ -1,39 +1,37 @@
-function loginCtrl($scope, $http, toastr, $location){
-    console.log("Hello from Site Controller");
+function loginCtrl($scope, $http, toastr, $location) {
+    $scope.check_login = function () {
+        if (localStorage.getItem('user')) {
+            return true;
 
-    $scope.check_login = function(){
-        if(localStorage.getItem('user')){
+        }
+        return false;
+    }
+
+    $scope.check_admin = function () {
+        if (localStorage.getItem('type') == "admin") {
             return true;
         }
         return false;
     }
 
-    $scope.check_admin = function(){
-        if(localStorage.getItem('type') == "admin"){
-            return true;
-        }
-        return false;
-    }
-
-    $scope.login = function(credentials){
-        $http.post('/login', credentials).then(function(response){
-            if(typeof response.data.token != 'undefined'){
-                localStorage.setItem('user',response.data.token)
-                localStorage.setItem('type', response.data.type)
+    $scope.login = function (credentials) {
+        $http.post('/login', credentials).then(function (response) {
+            if (typeof response.data.token != 'undefined') {
+                $location.url('/charts');
+                localStorage.setItem('user', response.data.token);
+                localStorage.setItem('type', response.data.type);
                 toastr.success('You are successfully logged in!', 'Login Success!');
-                $location.url('/');
+                $location.url('/charts');
+
             }
-            else if(response.data.user == false){
+            else if (response.data.user == false) {
                 toastr.error('Login Error');
+                $location.url('/login');
             }
-        }),function(response){
+
+        }
+        ), function (response) {
             console.log(error);
         }
     }
-
-    $scope.logout = function(){
-        localStorage.clear();
-        toastr.info("Successfully logged out!", "Logged Out!");
-    }
-
 }

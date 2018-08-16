@@ -7,7 +7,7 @@ const jwt_admin = 'SJwt25Wq62SFfjiw92sR';
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
-var db = mongojs('localhost:27017/peex', ['expenses','category']);
+var db = mongojs('localhost:27017/peex', ['expenses','category','users','carrental']);
 app.use(bodyparser.json());
 
 var port = process.env.PORT || 5000
@@ -18,6 +18,7 @@ app.use(express.urlencoded({
 
 app.use(express.static(__dirname + '/material'));
 
+//provjerava da li je vrsta tokena validna za nastavaka
 app.use('/peex/',function(request,response,next){
   jwt.verify(request.get('JWT'), jwt_secret, function(error, decoded) {      
     if (error) {
@@ -38,27 +39,6 @@ app.use('/peex/',function(request,response,next){
   });  
 })
 
-app.use('/admin/',function(request,response,next){
-    jwt.verify(request.get('JWT'), jwt_admin, function(error, decoded) {     
-      if (error) {
-        response.status(401).send('Unauthorized access'); 
-        console.log(error);   
-      } else {
-        db.collection("users").findOne({'_id': new MongoId(decoded._id)}, function(error, users) {
-          if (error){
-            throw error;
-          }else{
-            if(users){
-              next();
-            }else{
-              response.status(401).send('Credentials are wrong.');
-            }
-          }
-        });
-      }
-    });  
-  })
-
 app.post('/login', function(req, res) {
     var user = req.body;
     db.collection('users').findOne({
@@ -70,19 +50,7 @@ app.post('/login', function(req, res) {
         if(users) {
             bcrypt.compare(user.password, users.password, function(err, resp){
                 if(resp === true){
-                    if(users.type == "admin"){
-                        var token = jwt.sign(users, jwt_admin, {
-                            expiresIn: 60*60*24
-                        });
-                        res.send({
-                            success: true,
-                            message: 'Admin Authenticated',
-                            token: token,
-                            type : 'admin'
-                        })
-                        console.log("Admin authentication passed.");
-                    }
-                    else if(users.type == "user"){
+                    if(users.type == "user"){
                         var token = jwt.sign(users, jwt_secret, {
                             expiresIn: 60*60*24
                         });
