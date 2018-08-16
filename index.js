@@ -2,7 +2,6 @@ const express = require('express');
 const bodyparser = require("body-parser");
 const app = express();
 const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
-const jwt_admin = 'SJwt25Wq62SFfjiw92sR';
 
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
@@ -19,6 +18,7 @@ app.use(express.urlencoded({
 app.use(express.static(__dirname + '/material'));
 
 //provjerava da li je vrsta tokena validna za nastavaka
+//jwt.verify(token, public key, options callback)
 app.use('/peex/',function(request,response,next){
   jwt.verify(request.get('JWT'), jwt_secret, function(error, decoded) {      
     if (error) {
