@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Personal Expenses</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'
+    />
 
     <!-- Fonts and icons -->
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
     <!-- CSS Files -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/material-dashboard.css?v=2.1.0" />
     <link rel="stylesheet" href="//unpkg.com/angular-toastr/dist/angular-toastr.css" />
@@ -24,7 +27,7 @@
     <script src="//unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- JS custom -->
-    
+
 
 
     <!--Popeye-->
@@ -32,15 +35,20 @@
     <link rel="stylesheet" href="assets/release/popeye.css" />
 
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-<script src="app.js"></script>
+    <script src="app.js"></script>
+
+    <script src="services/authentication.service.js"></script>
     <script src="controllers/expensesCtrl.js"></script>
     <script src="controllers/addExpensesCtrl.js"></script>
     <script src="controllers/categoryCtrl.js"></script>
     <script src="controllers/editUser.js"></script>
-    §<script src="controllers/registration-controller.js"></script>
+    <script src="controllers/registration-controller.js"></script>
     <script src="controllers/loginCtrl.js"></script>
+    <script src="controllers/logoutCtrl.js"></script>
+
+
 
 </head>
 
@@ -50,7 +58,7 @@
     <div ui-view></div>
 
     <!--   Core JS Files   -->
- 
+
     <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
     <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
     <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
@@ -64,6 +72,7 @@
     <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
     <!-- Material Dashboard DEMO methods, don't include it in your project! -->
     <script src="assets/demo/demo.js"></script>
-   
+
 </body>
+
 </html>

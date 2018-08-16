@@ -2,17 +2,15 @@ function loginCtrl($scope, $http, toastr, $location) {
     $scope.check_login = function () {
         if (localStorage.getItem('user')) {
             return true;
-
         }
         return false;
     }
     $scope.login = function (credentials) {
         $http.post('/login', credentials).then(function (response) {
             if (typeof response.data.token != 'undefined') {
-                $location.url('/charts');
                 localStorage.setItem('user', response.data.token);
-                toastr.success('You are successfully logged in!', 'Login Success!');
-                $location.url('/charts');
+                toastr.success('Welcome to Peex, '+ response.data.username, 'Login Success!');
+                $location.url('dashboard/charts');
 
             }
             else if (response.data.user == false) {

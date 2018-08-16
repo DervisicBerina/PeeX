@@ -1,8 +1,9 @@
-function categoryCtrl($scope, $http, toastr) {
-
+function categoryCtrl($scope, $http, toastr, AuthenticationService) {
+    AuthenticationService.guardCustomerAuthenticated();
     $scope.categoryList = [];
     var refresh = function () {
-        $http.get('/category').then(function (response) {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } };
+        $http.get('/category', headers).then(function (response) {
             $scope.categoryList = response.data;
         });
     }
@@ -21,13 +22,11 @@ function categoryCtrl($scope, $http, toastr) {
     $scope.newCategory = { category: '' };
     $scope.submit = true;
     $scope.submit = function () {
+
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $scope.newCategory.category = $scope.categoryName;
-        $http.post('/category', $scope.newCategory).then(function successCallback(response) {
-            console.log("added");
-            console.log(response);
+        $http.post('/category', $scope.newCategory, headers).then(function successCallback(response) {
             toastr.success("Successfully added");
-            // window.location.reload();
-            // pozovi categoryCtrk.reloadCategories
         }, function errorCallback(response) {
             alert("error");
         });

@@ -15,7 +15,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('dashboard', {
             url: '/dashboard',
-            templateUrl: 'views/dashboard/dashboard.html'
+            templateUrl: 'views/dashboard/dashboard.html',
+            controller: ('logoutCtrl', logoutCtrl)
         })
         .state('dashboard.charts', {
             url: '/charts',

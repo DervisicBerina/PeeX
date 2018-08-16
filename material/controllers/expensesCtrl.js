@@ -1,6 +1,6 @@
-function expensesCtrl($scope, $http, toastr) {
-    console.log("adsdsa");
+function expensesCtrl($scope, $http, toastr, AuthenticationService) {
 
+    AuthenticationService.guardCustomerAuthenticated();
     $scope.myExpenses = [];
     $scope.selectedCategory;
     $scope.expense;
@@ -16,7 +16,8 @@ function expensesCtrl($scope, $http, toastr) {
         $scope.loadExpenses();
     }
     $scope.loadExpenses = function () {
-        $http.get('/expenses').then(function (response) {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        $http.get('/expenses', headers).then(function (response) {
             $scope.myExpenses = response.data;
         });
     }
@@ -30,16 +31,17 @@ function expensesCtrl($scope, $http, toastr) {
         $scope.visible = true;
         $scope.visible = $scope.visible = false;
     }
-
-    $http.get('/category').then(function (response) {
-        $scope.categoryList = response.data;
-    })
-
+    $scope.loadCategories = function () {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } };
+        $http.get('/category', headers).then(function (response) {
+            $scope.categoryList = response.data;
+        });
+    }
     $scope.add = function () {
         $scope.expense.type = $scope.selectedCategory.category;
-
-        $http.post('/expenses', $scope.expense).then(function successCallback(response) {
-            $scope.expense = response.data;
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        $http.post('/expenses', $scope.expense, headers).then(function successCallback(response) {
+            $scope.expense = {};
             toastr.success("Successfully added!");
         });
 
@@ -48,7 +50,8 @@ function expensesCtrl($scope, $http, toastr) {
     }
 
     $scope.deleteExpense = function (id) {
-        $http.delete('/expenses/' + id).then(function (response) {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        $http.delete('/expenses/' + id, headers).then(function (response) {
             $scope.refresh();
             toastr.error('Deleted expense');
         }
@@ -56,17 +59,19 @@ function expensesCtrl($scope, $http, toastr) {
     };
 
     $scope.editExpense = function (id) {
-        $http.get('/expenses/' + id).then(function (response) {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        $http.get('/expenses/' + id, headers).then(function (response) {
             $scope.expense = response.data;
         });
     };
     $scope.update = function () {
-        $http.put('/expenses/' + $scope.expense._id, $scope.expense).then(function (response) {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        $http.put('/expenses/' + $scope.expense._id, $scope.expense, headers).then(function (response) {
             $scope.refresh();
             toastr.info("Expenses updated!");
         });
     };
 
     $scope.loadExpenses();
-
+    $scope.loadCategories();
 }
