@@ -11,26 +11,18 @@
                   <h4 class="card-title">Login</h4>
                 </div>
                 <div class="card-body">
-                  <form>
-                    <div class="row">
-                      
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Password</label>
-                          <input type="password" class="form-control">
-                        </div>
-                      </div>
+                  <form class="form-signin">
+                    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" ng-model="credentials.email" required autofocus>
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="credentials.password" required>
+                    <div class="checkbox mb-3">
                     </div>
-                   
-                    <div class="clearfix"></div>
+                    <button class="btn btn-lg btn-warning btn-block" type="submit" ng-click="login(credentials)">Sign in</button>
                     <a href="#!register">Not Registered? Register now!</a>
-                  </form>
+                 </form>
                   <a href="#!dashboard/charts"><button type="submit" class="btn btn-primary pull-right">Login</button></a>
                 </div>
               </div>

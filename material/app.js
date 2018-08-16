@@ -5,12 +5,13 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('/', {
             url: '/login',
-            templateUrl: 'views/login.html'
+            templateUrl: 'views/login.html',
+            controller: ('loginCtrl',loginCtrl)
         })
         .state('register', {
             url: '/register',
             templateUrl: 'views/register.html',
-            controller: ('register', register)
+            controller: ('registration-controller', RegistrationController)
         })
         .state('dashboard', {
             url: '/dashboard',
