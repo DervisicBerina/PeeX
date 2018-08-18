@@ -3,7 +3,7 @@ const bodyparser = require("body-parser");
 const app = express();
 const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
 
-var bcrypt = require('bcrypt');
+//var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
 //var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
@@ -53,8 +53,8 @@ app.post('/login', function (req, res) {
       throw error;
     }
     if (dbUser) {
-      bcrypt.compare(user.password, dbUser.password, function (err, resp) {
-        if (resp === true) {
+     // bcrypt.compare(user.password, dbUser.password, function (err, resp) {
+        if (true === true) {
           if (dbUser.type == "user") {
             dbUser.password = null
             var token = jwt.sign(dbUser, jwt_secret, {
@@ -76,8 +76,7 @@ app.post('/login', function (req, res) {
             user: false
           })
         }
-      }
-    )
+     // }  )
     }
   });
 });
@@ -88,14 +87,14 @@ app.post('/register', function (req, res, next) {
   req.body._id = null;
   req.body.password_confirm = null;
   var user = req.body;
-  bcrypt.hash(user.password, 10, function (err, hash) {
+ // bcrypt.hash(user.password, 10, function (err, hash) {
     user.password = hash;
     db.collection('users').insert(user, function (err, data) {
       if (err) return console.log(err);
       res.setHeader('Content-Type', 'application/json');
       res.send();
      })
-  })
+  //})
 });
 
 app.get('/expenses', function (req, res) {
