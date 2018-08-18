@@ -88,7 +88,7 @@ app.post('/register', function (req, res, next) {
   req.body.password_confirm = null;
   var user = req.body;
  // bcrypt.hash(user.password, 10, function (err, hash) {
-    user.password = hash;
+    // user.password = hash;
     db.collection('users').insert(user, function (err, data) {
       if (err) return console.log(err);
       res.setHeader('Content-Type', 'application/json');
