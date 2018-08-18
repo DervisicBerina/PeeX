@@ -9,7 +9,6 @@ function loginCtrl($scope, $http, toastr, $location) {
         $http.post('/login', credentials).then(function (response) {
             if (typeof response.data.token != 'undefined') {
                 localStorage.setItem('user', response.data.token);
-                toastr.success('Welcome to Peex, '+ response.data.username, 'Login Success!');
                 $location.url('dashboard/charts');
 
             }

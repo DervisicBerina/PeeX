@@ -22,7 +22,6 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.newCategory = { category: '' };
     $scope.submit = true;
     $scope.submit = function () {
-
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $scope.newCategory.category = $scope.categoryName;
         $http.post('/category', $scope.newCategory, headers).then(function successCallback(response) {

@@ -6,18 +6,23 @@ const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
-var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
+// var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
+var db = mongojs('mongodb://berina:berina123@ds020938.mlab.com:20938/peex', ['expenses', 'category', 'users']);
+
+
 app.use(bodyparser.json());
 
 var port = process.env.PORT || 5000
-app.use(express.json()); // to support JSON-encoded bodies
+
+
+app.use(express.json()); 
 app.use(express.urlencoded({
   extended: true
-})); // to support URL-encoded bodies
+})); 
 
 app.use(express.static(__dirname + '/material'));
 
-//provjerava da li je vrsta tokena validna za nastavaka
+
 //jwt.verify(token, public key, options callback)
 app.use('/peex/', function (request, response, next) {
   jwt.verify(request.get('JWT'), jwt_secret, function (error, decoded) {
@@ -51,15 +56,17 @@ app.post('/login', function (req, res) {
       bcrypt.compare(user.password, dbUser.password, function (err, resp) {
         if (resp === true) {
           if (dbUser.type == "user") {
+            dbUser.password = null
             var token = jwt.sign(dbUser, jwt_secret, {
               expiresIn: 60 * 60 * 24
+              
             });
             res.send({
               success: true,
               message: 'Authenticated',
               token: token,
               type: "user",
-              username: dbUser.firstName
+              username: dbUser.firstName,
             })
             console.log("Authentication passed.");
           }
@@ -69,7 +76,8 @@ app.post('/login', function (req, res) {
             user: false
           })
         }
-      })
+      }
+    )
     }
   });
 });
@@ -86,7 +94,7 @@ app.post('/register', function (req, res, next) {
       if (err) return console.log(err);
       res.setHeader('Content-Type', 'application/json');
       res.send();
-    })
+     })
   })
 });
 
