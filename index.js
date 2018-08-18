@@ -6,8 +6,8 @@ const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
-// var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
-var db = mongojs('mongodb://berina:berina123@ds020938.mlab.com:20938/peex', ['expenses', 'category', 'users']);
+var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
+//var db = mongojs('mongodb://berina:berina123@ds020938.mlab.com:20938/peex', ['expenses', 'category', 'users']);
 
 
 app.use(bodyparser.json());
