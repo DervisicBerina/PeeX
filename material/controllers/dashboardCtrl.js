@@ -1,6 +1,7 @@
 function dashboardCtrl($scope, $http, AuthenticationService){
     AuthenticationService.guardCustomerAuthenticated();
     $scope.myExpenses = [];
+    $scope.expense;
     console.log("Initializing dashboard");
 //     <script>
 //     $(document).ready(function() {
@@ -19,12 +20,12 @@ function dashboardCtrl($scope, $http, AuthenticationService){
             $scope.myExpenses = response.data;
         });
     }
-    AuthenticationService.guardCustomerAuthenticated();
+
         // $scope.loadExpenses = function () {
         //     var headers = { headers: { 'token': AuthenticationService.getToken() } }
         //     $http.get('/expensesLastList', headers).then(function (response) {
         //         $scope.myExpenses = response.data;
         //     });
         // }
-        $scope.loadExpenses();
+        $scope.refresh();
 }
