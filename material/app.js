@@ -21,7 +21,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('dashboard.charts', {
             url: '/charts',
             templateUrl: 'views/dashboard/dashboardCharts.html',
-            controller: 'dashboardCtrl'
+            controller: ('dashboardCtrl',dashboardCtrl)
         })
         .state('dashboard.tables', {
             url: '/tables',
@@ -51,15 +51,5 @@ app.config(function ($stateProvider, $urlRouterProvider) {
      
 });
 
-app.controller('dashboardCtrl',function(){
-    console.log("Initializing dashboard");
-//     <script>
-//     $(document).ready(function() {
-//         // Javascript method's body can be found in assets/js/demos.js
-//         md.initDashboardPageCharts();
-//     });
-// </script>
-    md.initDashboardPageCharts();
-});
 
 
