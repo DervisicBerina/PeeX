@@ -4,6 +4,7 @@ const app = express();
 const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
 
 var bcrypt = require('bcrypt-nodejs');
+var salt = bcrypt.genSaltSync(10);
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
 //var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
@@ -87,7 +88,7 @@ app.post('/register', function (req, res, next) {
   req.body._id = null;
   req.body.password_confirm = null;
   var user = req.body;
-  bcrypt.hash(user.password, 10, function (err, hash) {
+  bcrypt.hash(user.password, salt,null, function(err, hash) {
     user.password = hash;
     db.collection('users').insert(user, function (err, data) {
       if (err) return console.log(err);
