@@ -16,7 +16,7 @@ function dashboardCtrl($scope, $http, AuthenticationService){
     }
     $scope.loadExpenses = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
-        $http.get('/expenses', headers).then(function (response) {
+        $http.get('/expensesLastList', headers).then(function (response) {
             $scope.myExpenses = response.data;
         });
     }
