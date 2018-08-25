@@ -205,7 +205,7 @@ app.put('/category/:id', function (req, res) {
     },
     update: {
       $set: {
-        category: req.body.category,
+        category: req.body.category
       }
     },
     new: true
