@@ -15,15 +15,13 @@ app.use(bodyparser.json());
 var port = process.env.PORT || 5000
 
 
-app.use(express.json()); 
+app.use(express.json());
 app.use(express.urlencoded({
   extended: true
-})); 
+}));
 
 app.use(express.static(__dirname + '/material'));
 
-
-// jwt.verify(token, public key, options callback)
 app.use('/peex/', function (request, response, next) {
   jwt.verify(request.get('JWT'), jwt_secret, function (error, decoded) {
     if (error) {
@@ -44,6 +42,8 @@ app.use('/peex/', function (request, response, next) {
   });
 })
 
+//login and register
+
 app.post('/login', function (req, res) {
   var user = req.body;
   db.collection('users').findOne({
@@ -59,7 +59,7 @@ app.post('/login', function (req, res) {
             dbUser.password = null
             var token = jwt.sign(dbUser, jwt_secret, {
               expiresIn: 60 * 60 * 24
-              
+
             });
             res.send({
               success: true,
@@ -76,7 +76,7 @@ app.post('/login', function (req, res) {
             user: false
           })
         }
-     }  )
+      })
     }
   });
 });
@@ -93,44 +93,15 @@ app.post('/register', function (req, res, next) {
       if (err) return console.log(err);
       res.setHeader('Content-Type', 'application/json');
       res.send();
-     })
-  })
-});
-
-app.get('/expenses', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  db.expenses.find(function (err, docs) {
-    res.json(docs)
-  })
-});
-
-var notAuthorizedRequest = function(res){
-  return res.status(401).send({
-    auth:false,message:"token not provided"
-  });
-}
-
-app.get('/category', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  db.category.aggregate([
-
-    { $project: { _id: 0, category: 1 } }
-
-  ],
-    (function (err, doc) {
-      res.json(doc)
     })
-  );
-
+  })
 });
+
+
+
+
+//manage users
+
 app.get('/users', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
@@ -153,17 +124,6 @@ app.post('/users', function (req, res) {
   });
 });
 
-app.post('/expenses', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  console.log(req.body);
-  db.expenses.insert(req.body, function (err, docs) {
-    res.send();
-  })
-});
 app.put('/users/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
@@ -191,6 +151,26 @@ app.put('/users/:id', function (req, res) {
     });
 });
 
+
+//manage category
+
+app.get('/category', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  db.category.aggregate([
+
+    { $project: { _id: 0, category: 1 } }
+
+  ],
+    (function (err, doc) {
+      res.json(doc)
+    })
+  );
+});
+
 app.post('/category', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
@@ -202,6 +182,103 @@ app.post('/category', function (req, res) {
     res.send();
   });
 
+});
+app.get('/category/:id', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  var id = req.params.id;
+  console.log(id);
+  db.category.findOne({
+    _id: mongojs.ObjectId(id),
+  }, function (err, doc) {
+    res.json(doc);
+  });
+});
+app.put('/category/:id', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  var id = req.params.id;
+  db.category.findAndModify({
+    query: {
+      _id: mongojs.ObjectId(id)
+    },
+    update: {
+      $set: {
+        name: req.body.name,
+      }
+    },
+    new: true
+  },
+    function (err, doc) {
+      res.json(doc);
+    });
+});
+app.delete('/category/:id', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  var id = req.params.id;
+  console.log("deleting expense with id: ", id);
+  db.category.remove({
+    _id: mongojs.ObjectId(id)
+  }, function (err, doc) {
+    res.json(doc);
+  })
+});
+
+//manage expenses
+
+
+app.post('/expenses', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  console.log(req.body);
+  db.expenses.insert(req.body, function (err, docs) {
+    res.send();
+  })
+});
+
+app.get('/expenses', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  db.expenses.find(function (err, docs) {
+    res.json(docs)
+  })
+});
+
+var notAuthorizedRequest = function (res) {
+  return res.status(401).send({
+    auth: false, message: "token not provided"
+  });
+}
+
+app.get('/expenses/:id', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  var id = req.params.id;
+  console.log(id);
+  db.expenses.findOne({
+    _id: mongojs.ObjectId(id),
+  }, function (err, doc) {
+    res.json(doc);
+  });
 });
 app.delete('/expenses/:id', function (req, res) {
   var token = req.headers['token'];
@@ -216,20 +293,6 @@ app.delete('/expenses/:id', function (req, res) {
   }, function (err, doc) {
     res.json(doc);
   })
-});
-app.get('/expenses/:id', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  var id = req.params.id;
-  console.log(id);
-  db.expenses.findOne({
-    _id: mongojs.ObjectId(id),
-  }, function (err, doc) {
-    res.json(doc);
-  });
 });
 app.put('/expenses/:id', function (req, res) {
   var token = req.headers['token'];
