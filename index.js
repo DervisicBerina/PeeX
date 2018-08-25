@@ -226,7 +226,7 @@ app.delete('/category/:id', function (req, res) {
     return notAuthorizedRequest(res);
   }
   var id = req.params.id;
-  console.log("deleting expense with id: ", id);
+  console.log("deleting category with id: ", id);
   db.category.remove({
     _id: mongojs.ObjectId(id)
   }, function (err, doc) {

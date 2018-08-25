@@ -1,6 +1,9 @@
 function categoryCtrl($scope, $http, toastr, AuthenticationService) {
+
     AuthenticationService.guardCustomerAuthenticated();
     $scope.categoryList = [];
+    $scope.addButtonVisible = false;
+
     var refresh = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } };
         $http.get('/category', headers).then(function (response) {
@@ -25,8 +28,8 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
 
     $scope.categoryName;
     $scope.newCategory = { category: '' };
-    $scope.submit = true;
-    $scope.submit = function () {
+    $scope.add = true;
+    $scope.add = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $scope.newCategory.category = $scope.categoryName;
         $http.post('/category', $scope.newCategory, headers).then(function successCallback(response) {
