@@ -7,7 +7,6 @@ function dashboardCtrl($scope, $http, AuthenticationService){
 //     });
 // </script>
     md.initDashboardPageCharts();
-    $scope.myExpenses = [];
     
     $scope.refresh = function () {
         $scope.loadExpenses();
@@ -25,5 +24,5 @@ function dashboardCtrl($scope, $http, AuthenticationService){
         //         $scope.myExpenses = response.data;
         //     });
         // }
-
+        $scope.loadExpenses();
 }
