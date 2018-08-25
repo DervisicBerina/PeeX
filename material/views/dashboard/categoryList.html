@@ -30,7 +30,7 @@
                             </div>
                             <button type="button" class="btn btn-secondary" ng-click="close()">Close</button>
                             <button type="submit" type="button" ng-click="submit()" ng-if="!addButtonVisible" class="btn btn-primary">Add</button>
-                            <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-if="addButtonVisible" ng-click="update();close()">Update
+                            <button type="button" class="btn btn-primary" style="text-align:right !important;" ng-if="!addButtonVisible" ng-click="update();close()">Update
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                         </form>
