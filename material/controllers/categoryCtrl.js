@@ -76,5 +76,5 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
             toastr.info("category updated!");
         });
     };
-    loadCategories();
+    refresh();
 }
