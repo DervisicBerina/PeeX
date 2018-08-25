@@ -31,7 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('dashboard.user', {
             url: '/user',
             templateUrl: 'views/dashboard/user.html',
-            // controller: ('editUser',editUser)
+            controller: ('editUser',editUser)
         })
         .state('dashboard.recurringExpenses', {
             url: '/recurringExpenses',
