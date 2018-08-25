@@ -3,7 +3,7 @@ const bodyparser = require("body-parser");
 const app = express();
 const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
 
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
 //var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
@@ -23,7 +23,7 @@ app.use(express.urlencoded({
 app.use(express.static(__dirname + '/material'));
 
 
-//jwt.verify(token, public key, options callback)
+// jwt.verify(token, public key, options callback)
 app.use('/peex/', function (request, response, next) {
   jwt.verify(request.get('JWT'), jwt_secret, function (error, decoded) {
     if (error) {
@@ -53,7 +53,7 @@ app.post('/login', function (req, res) {
       throw error;
     }
     if (dbUser) {
-     // bcrypt.compare(user.password, dbUser.password, function (err, resp) {
+      bcrypt.compare(user.password, dbUser.password, function (err, resp) {
         if (true === true) {
           if (dbUser.type == "user") {
             dbUser.password = null
@@ -76,7 +76,7 @@ app.post('/login', function (req, res) {
             user: false
           })
         }
-     // }  )
+     }  )
     }
   });
 });
@@ -87,14 +87,14 @@ app.post('/register', function (req, res, next) {
   req.body._id = null;
   req.body.password_confirm = null;
   var user = req.body;
- // bcrypt.hash(user.password, 10, function (err, hash) {
-    // user.password = hash;
+  bcrypt.hash(user.password, 10, function (err, hash) {
+    user.password = hash;
     db.collection('users').insert(user, function (err, data) {
       if (err) return console.log(err);
       res.setHeader('Content-Type', 'application/json');
       res.send();
      })
-  //})
+  })
 });
 
 app.get('/expenses', function (req, res) {
