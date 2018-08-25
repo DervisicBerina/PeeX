@@ -1,13 +1,13 @@
 function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     AuthenticationService.guardCustomerAuthenticated();
     $scope.categoryList = [];
-    var refresh = function () {
-        var headers = { headers: { 'token': AuthenticationService.getToken() } };
-        $http.get('/category', headers).then(function (response) {
-            $scope.categoryList = response.data;
-        });
+    $scope.addButtonVisible = false;
+    $scope.hideAddButton = function () {
+        $scope.addButtonVisible = false;
     }
-    refresh();
+    $scope.showAddButton = function () {
+        $scope.addButtonVisible = true;
+    }
     $scope.open = function () {
         $scope.visible = false;
         $scope.visible = $scope.visible = true;
@@ -17,15 +17,15 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
         $scope.visible = true;
         $scope.visible = $scope.visible = false;
     }
-    $scope.addButtonVisible = false;
 
-    $scope.hideAddButton = function () {
-        $scope.addButtonVisible = false;
+    var refresh = function () {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } };
+        $http.get('/category', headers).then(function (response) {
+            $scope.categoryList = response.data;
+        });
     }
-    $scope.showAddButton = function () {
-        $scope.addButtonVisible = true;
-    }
-
+    refresh();
+    
     $scope.categoryName;
     $scope.newCategory = { category: '' };
     $scope.submit = true;
