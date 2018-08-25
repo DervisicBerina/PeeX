@@ -154,13 +154,21 @@ app.put('/users/:id', function (req, res) {
 
 
 app.get('/expensesLastList', function(req,res){
-  db.expenses.find().reverse().limit(10),
+  db.expenses.aggregate(
+    [
+      {
+        $sort: {
+          _id: -1
+        }
+      }, {
+        $limit: 10
+      }
+    ],
     function (err, docs) {
     res.json(docs)
-    }
   })
 
-
+})
 
 //manage category
 
