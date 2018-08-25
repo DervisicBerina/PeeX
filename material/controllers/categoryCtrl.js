@@ -2,28 +2,41 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
 
     AuthenticationService.guardCustomerAuthenticated();
     $scope.categoryList = [];
+    $scope.selectedCategory;
+    $scope.expense;
     $scope.addButtonVisible = false;
 
-    var refresh = function () {
-        var headers = { headers: { 'token': AuthenticationService.getToken() } };
-        $http.get('/category', headers).then(function (response) {
-            $scope.categoryList = response.data;
-        });
-    }
-    refresh();
-    $scope.open = function () {
-        $scope.visible = false;
-        $scope.visible = $scope.visible = true;
-    }
     $scope.hideAddButton = function () {
         $scope.addButtonVisible = false;
     }
     $scope.showAddButton = function () {
         $scope.addButtonVisible = true;
     }
+    $scope.refresh = function () {
+        $scope.loadCategories();
+    }
+    $scope.loadCategories = function () {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } };
+        $http.get('/category', headers).then(function (response) {
+            $scope.categoryList = response.data;
+        });
+    }
+
+    $scope.open = function () {
+        $scope.visible = false;
+        $scope.visible = $scope.visible = true;
+    }
+
     $scope.close = function () {
         $scope.visible = true;
         $scope.visible = $scope.visible = false;
+    }
+
+    $scope.loadCategories = function () {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } };
+        $http.get('/category', headers).then(function (response) {
+            $scope.categoryList = response.data;
+        });
     }
 
     $scope.categoryName;
@@ -38,7 +51,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
             alert("error");
         });
         $scope.close();
-        refresh();
+        $scope.loadCategories();
 
     }
     $scope.deleteCategory = function (id) {
