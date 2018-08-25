@@ -44,7 +44,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.deleteCategory = function (id) {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.delete('/category/' + id, headers).then(function (response) {
-            $scope.refresh();
+            refresh();
             toastr.error('Deleted category');
         }
         );
@@ -59,7 +59,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.update = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.put('/category/' + $scope.expense._id, $scope.expense, headers).then(function (response) {
-            $scope.refresh();
+            refresh();
             toastr.info("category updated!");
         });
     };
