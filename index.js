@@ -3,7 +3,7 @@ const bodyparser = require("body-parser");
 const app = express();
 const jwt_secret = 'WU5CjF8fHxG40S2t7oyk';
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var jwt = require('jsonwebtoken');
 var mongojs = require('mongojs');
 //var db = mongojs('localhost:27017/peex', ['expenses', 'category', 'users']);
