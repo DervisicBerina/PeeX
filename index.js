@@ -156,18 +156,16 @@ app.put('/users/:id', function (req, res) {
 app.get('/expensesLastList', function(req,res){
   db.expenses.aggregate(
     [
+      { $sort: { category: 1} },
       {
-        $sort: {
-          _id: 1
-        }
-      }, {
-        $limit: 10
+        $group:
+          {
+            _id: "$category",
+            lastcategory: { $last: "$category" }
+          }
       }
-    ],
-    function (err, docs) {
-    res.json(docs)
-  })
-
+    ]
+ )
 })
 
 //manage category
