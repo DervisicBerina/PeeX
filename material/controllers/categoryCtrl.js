@@ -2,6 +2,8 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
 
     AuthenticationService.guardCustomerAuthenticated();
     $scope.categoryList = [];
+    $scope.addButtonVisible = false;
+   
     $scope.selectedCategory;
     $scope.expense;
     $scope.addButtonVisible = false;
@@ -12,32 +14,22 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.showAddButton = function () {
         $scope.addButtonVisible = true;
     }
-    $scope.refresh = function () {
-        $scope.loadCategories();
-    }
-    $scope.loadCategories = function () {
+    var refresh = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } };
         $http.get('/category', headers).then(function (response) {
             $scope.categoryList = response.data;
         });
     }
-
+    refresh();
     $scope.open = function () {
         $scope.visible = false;
         $scope.visible = $scope.visible = true;
     }
-
     $scope.close = function () {
         $scope.visible = true;
         $scope.visible = $scope.visible = false;
     }
-
-    $scope.loadCategories = function () {
-        var headers = { headers: { 'token': AuthenticationService.getToken() } };
-        $http.get('/category', headers).then(function (response) {
-            $scope.categoryList = response.data;
-        });
-    }
+   
 
     $scope.categoryName;
     $scope.newCategory = { category: '' };
@@ -51,13 +43,13 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
             alert("error");
         });
         $scope.close();
-        $scope.loadCategories();
+        refresh();
 
     }
     $scope.deleteCategory = function (id) {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.delete('/category/' + id, headers).then(function (response) {
-            $scope.loadCategories();
+            $scope.refresh();
             toastr.error('Deleted expense');
         }
         );
@@ -72,7 +64,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.update = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.put('/category/' + $scope.expense._id, $scope.expense, headers).then(function (response) {
-            $scope.loadCategories();
+            $scope.refresh();
             toastr.info("category updated!");
         });
     };
