@@ -7,12 +7,21 @@ function dashboardCtrl($scope, $http, AuthenticationService){
 //     });
 // </script>
     md.initDashboardPageCharts();
+    $scope.refresh = function () {
+        $scope.loadExpenses();
+    }
+    $scope.loadExpenses = function () {
+        var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        $http.get('/expenses', headers).then(function (response) {
+            $scope.myExpenses = response.data;
+        });
+    }
     AuthenticationService.guardCustomerAuthenticated();
-        $scope.loadExpenses = function () {
-            var headers = { headers: { 'token': AuthenticationService.getToken() } }
-            $http.get('/expensesLastList', headers).then(function (response) {
-                $scope.myExpenses = response.data;
-            });
-        }
+        // $scope.loadExpenses = function () {
+        //     var headers = { headers: { 'token': AuthenticationService.getToken() } }
+        //     $http.get('/expensesLastList', headers).then(function (response) {
+        //         $scope.myExpenses = response.data;
+        //     });
+        // }
 
 }
