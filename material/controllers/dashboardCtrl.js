@@ -1,4 +1,6 @@
 function dashboardCtrl($scope, $http, AuthenticationService){
+    AuthenticationService.guardCustomerAuthenticated();
+    $scope.myExpenses = [];
     console.log("Initializing dashboard");
 //     <script>
 //     $(document).ready(function() {
