@@ -160,15 +160,9 @@ app.get('/category', function (req, res) {
   if (!tokenValid) {
     return notAuthorizedRequest(res);
   }
-  db.category.aggregate([
-
-    { $project: { _id: 0, category: 1 } }
-
-  ],
-    (function (err, doc) {
-      res.json(doc)
-    })
-  );
+  db.category.find(function (err, docs) {
+    res.json(docs)
+  })
 });
 
 app.post('/category', function (req, res) {
