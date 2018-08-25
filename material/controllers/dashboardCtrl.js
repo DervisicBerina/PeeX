@@ -9,7 +9,7 @@ function dashboardCtrl($scope, $http, AuthenticationService){
 //         md.initDashboardPageCharts();
 //     });
 // </script>
-    md.initDashboardPageCharts();
+    // md.initDashboardPageCharts();
     
     $scope.refresh = function () {
         $scope.loadExpenses();
