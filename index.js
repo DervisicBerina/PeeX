@@ -261,6 +261,30 @@ app.delete('/category/:id', function (req, res) {
 
 //manage expenses
 
+app.get('/sumExpenses', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  db.expenses.aggregate([
+    [
+      {
+        $group: {
+          _id: null, 
+          total: {
+            $sum: '$cost'
+          }
+        }
+      }
+    ]
+  ],
+    (function (err, docs) {
+    res.json(docs)
+  })
+)
+});
+
 
 app.post('/expenses', function (req, res) {
   var token = req.headers['token'];
