@@ -201,11 +201,12 @@ app.get('/expensesLastList', function (req, res) {
         $limit: 10
       }
     ],
-    find(query)
-  (function (err, docs) {
+    function (err, docs) {
       res.json(docs)
     })
-  )
+  db.expenses.find(query).toArray(function (err, docs) {
+    res.json(docs)
+  });
 })
 
 
