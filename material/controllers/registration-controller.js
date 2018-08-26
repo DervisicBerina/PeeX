@@ -1,10 +1,8 @@
 function RegistrationController($scope, $http, toastr, $location) {
   $scope.add_user = function () {
     $http.post('/register', $scope.user).then(function (data) {
-      console.log(data.status);
       if (data.status == 202) {
-        console.log("kvakvakva")
-        toastr.info("Use another email");
+             alert("Use another email");
       } else {
         // $scope.users_list = [];
         $scope.user = null;
