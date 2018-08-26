@@ -308,7 +308,7 @@ app.get('/expenses', function (req, res) {
   }
   db.expenses.find({ 'user_id': userId }).toArray(function (err, docs) {
     res.json(docs)
-  })
+  });
 });
 
 var notAuthorizedRequest = function (res) {
