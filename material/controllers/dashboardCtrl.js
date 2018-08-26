@@ -4,14 +4,7 @@ function dashboardCtrl($scope, $http, AuthenticationService){
     $scope.expense;
   
     console.log("Initializing dashboard");
-//     <script>
-//     $(document).ready(function() {
-//         // Javascript method's body can be found in assets/js/demos.js
-//         md.initDashboardPageCharts();
-//     });
-// </script>
-    // md.initDashboardPageCharts();
-    
+
     $scope.refresh = function () {
         $scope.loadExpenses();
     }
@@ -27,13 +20,5 @@ function dashboardCtrl($scope, $http, AuthenticationService){
        
     }
     
-    
-
-        // $scope.loadExpenses = function () {
-        //     var headers = { headers: { 'token': AuthenticationService.getToken() } }
-        //     $http.get('/expensesLastList', headers).then(function (response) {
-        //         $scope.myExpenses = response.data;
-        //     });
-        // }
         $scope.refresh();
 }
