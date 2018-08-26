@@ -300,7 +300,7 @@ app.post('/expenses', function (req, res) {
 });
 
 app.get('/expenses', function (req, res) {
-  var userId = req.header['user_id'];
+  var userId = req.headers['user_id'];
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   var userIdValid = userId !== 'null' && userId !== undefined;
