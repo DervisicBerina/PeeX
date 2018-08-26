@@ -23,6 +23,8 @@ function dashboardCtrl($scope, $http, AuthenticationService){
         $http.get('/sumExpenses',headers).then(function(response){
             $scope.sum = response.data;
         })
+        console.log(data);
+        console.log(sum);
     }
     
     
