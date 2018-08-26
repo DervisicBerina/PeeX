@@ -33,7 +33,7 @@ function expensesCtrl($scope, $http, toastr, AuthenticationService) {
     }
     $scope.loadCategories = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } };
-        $http.get('/category', headers).then(function (response) {
+        $http.get('/user/category', headers).then(function (response) {
             $scope.categoryList = response.data;
         });
     }
