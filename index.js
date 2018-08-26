@@ -303,11 +303,13 @@ app.get('/expenses', function (req, res) {
   var userId = req.header['user_id'];
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
+  var userIdValid = userId !== 'null' && userId !== undefined;
+  if (!tokenValid || !userIdValid) {
     return notAuthorizedRequest(res);
   }
   var query = {user_id:userId};
-  db.expenses.find(query).toArray(function (err, docs) {
+
+  db.collection('expenses').find(query).toArray(function (err, docs) {
     res.json(docs)
   });
 });
