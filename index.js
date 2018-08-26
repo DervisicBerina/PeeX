@@ -67,6 +67,7 @@ app.post('/login', function (req, res) {
               message: 'Authenticated',
               token: token,
               type: "user",
+              user_id: dbUser._id,
               username: dbUser.firstName,
             })
             console.log("Authentication passed.");
