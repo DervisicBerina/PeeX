@@ -166,8 +166,31 @@ app.put('/users/:id', function (req, res) {
     });
 });
 
+//manage expenses
+// var userId = req.headers['user_id'];
+// var token = req.headers['token'];
+// var tokenValid = token !== 'null' && token !== undefined;
+// var userIdValid = userId !== 'null' && userId !== undefined;
+// if (!tokenValid || !userIdValid) {
+//   return notAuthorizedRequest(res);
+// }
+// var query = {user_id:userId};
+
+// db.collection('expenses').find(query).toArray(function (err, docs) {
+//   res.json(docs)
+// });
+// });
 
 app.get('/expensesLastList', function (req, res) {
+  var userId = req.headers['user_id'];
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  var userIdValid = userId !== 'null' && userId !== undefined;
+  if (!tokenValid || !userIdValid) {
+    return notAuthorizedRequest(res);
+  }
+  var query = { user_id: userId };
+
   db.expenses.aggregate(
     [
       {
@@ -178,11 +201,13 @@ app.get('/expensesLastList', function (req, res) {
         $limit: 10
       }
     ],
-    function (err, docs) {
+    find(query)
+  (function (err, docs) {
       res.json(docs)
     })
-
+  )
 })
+
 
 //manage category
 
@@ -260,20 +285,6 @@ app.delete('/category/:id', function (req, res) {
   })
 });
 
-//manage expenses
-// var userId = req.headers['user_id'];
-// var token = req.headers['token'];
-// var tokenValid = token !== 'null' && token !== undefined;
-// var userIdValid = userId !== 'null' && userId !== undefined;
-// if (!tokenValid || !userIdValid) {
-//   return notAuthorizedRequest(res);
-// }
-// var query = {user_id:userId};
-
-// db.collection('expenses').find(query).toArray(function (err, docs) {
-//   res.json(docs)
-// });
-// });
 
 app.get('/sumExpenses', function (req, res) {
   var token = req.headers['token'];
@@ -283,7 +294,7 @@ app.get('/sumExpenses', function (req, res) {
   if (!tokenValid || !userIdValid) {
     return notAuthorizedRequest(res);
   }
-  var query = {user_id:userId};
+  var query = { user_id: userId };
   db.expenses.aggregate([
     [
       {
@@ -295,12 +306,11 @@ app.get('/sumExpenses', function (req, res) {
         }
       }
     ]
-  ],find(query)
- (function (err, docs) {
+  ],
+    (function (err, docs) {
       res.json(docs)
     })
   )
-  
 });
 
 
@@ -324,7 +334,7 @@ app.get('/expenses', function (req, res) {
   if (!tokenValid || !userIdValid) {
     return notAuthorizedRequest(res);
   }
-  var query = {user_id:userId};
+  var query = { user_id: userId };
 
   db.collection('expenses').find(query).toArray(function (err, docs) {
     res.json(docs)
