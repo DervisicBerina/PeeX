@@ -261,13 +261,29 @@ app.delete('/category/:id', function (req, res) {
 });
 
 //manage expenses
+// var userId = req.headers['user_id'];
+// var token = req.headers['token'];
+// var tokenValid = token !== 'null' && token !== undefined;
+// var userIdValid = userId !== 'null' && userId !== undefined;
+// if (!tokenValid || !userIdValid) {
+//   return notAuthorizedRequest(res);
+// }
+// var query = {user_id:userId};
+
+// db.collection('expenses').find(query).toArray(function (err, docs) {
+//   res.json(docs)
+// });
+// });
 
 app.get('/sumExpenses', function (req, res) {
   var token = req.headers['token'];
+  var userId = req.headers['user_id'];
   var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
+  var userIdValid = userId !== 'null' && userId !== undefined;
+  if (!tokenValid || !userIdValid) {
     return notAuthorizedRequest(res);
   }
+  var query = {user_id:userId};
   db.expenses.aggregate([
     [
       {
@@ -280,7 +296,7 @@ app.get('/sumExpenses', function (req, res) {
       }
     ]
   ],
-    (function (err, docs) {
+  find(query)(function (err, docs) {
       res.json(docs)
     })
   )
