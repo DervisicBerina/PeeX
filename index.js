@@ -88,12 +88,25 @@ app.post('/register', function (req, res, next) {
   req.body._id = null;
   req.body.password_confirm = null;
   var user = req.body;
-  bcrypt.hash(user.password, salt,null, function(err, hash) {
+  var find = req.body.email;
+  console.log(find);
+  bcrypt.hash(user.password, salt, null, function (err, hash) {
     user.password = hash;
-    db.collection('users').insert(user, function (err, data) {
-      if (err) return console.log(err);
-      res.setHeader('Content-Type', 'application/json');
-      res.send();
+    db.users.find({
+      email: find
+    }).toArray(function (err, result) {
+      if (err) throw err;
+      console.log(result);
+      if (result.length > 0) {
+        res.sendStatus(204);
+      } else {
+
+        db.collection('users').insert(user, function (err, data) {
+          if (err) return console.log(err);
+          res.setHeader('Content-Type', 'application/json');
+          res.send();
+        })
+      }
     })
   })
 });
@@ -153,7 +166,7 @@ app.put('/users/:id', function (req, res) {
 });
 
 
-app.get('/expensesLastList', function(req,res){
+app.get('/expensesLastList', function (req, res) {
   db.expenses.aggregate(
     [
       {
@@ -165,8 +178,8 @@ app.get('/expensesLastList', function(req,res){
       }
     ],
     function (err, docs) {
-    res.json(docs)
-  })
+      res.json(docs)
+    })
 
 })
 
