@@ -306,7 +306,7 @@ app.get('/expenses', function (req, res) {
   if (!tokenValid) {
     return notAuthorizedRequest(res);
   }
-  db.expenses.find({ 'user_id': userId }, function (err, docs) {
+  db.expenses.find({ 'user_id': userId }).toArray(function (err, docs) {
     res.json(docs)
   })
 });
