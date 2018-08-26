@@ -20,7 +20,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
 
     var refresh = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } };
-        $http.get('/user/category', headers).then(function (response) {
+        $http.get('/category', headers).then(function (response) {
             $scope.categoryList = response.data;
         });
     }
@@ -32,7 +32,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.submit = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $scope.newCategory.category = $scope.categoryName;
-        $http.post('/user/category', $scope.newCategory, headers).then(function successCallback(response) {
+        $http.post('/category', $scope.newCategory, headers).then(function successCallback(response) {
             toastr.success("Successfully added");
         }, function errorCallback(response) {
             alert("error");
@@ -43,7 +43,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     }
     $scope.deleteCategory = function (id) {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
-        $http.delete('/user/category/' + id, headers).then(function (response) {
+        $http.delete('/category/' + id, headers).then(function (response) {
             refresh();
             toastr.error('Deleted category');
         }
@@ -52,13 +52,13 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
 
     $scope.editCategory = function (id) {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
-        $http.get('/user/category/' + id, headers).then(function (response) {
+        $http.get('/category/' + id, headers).then(function (response) {
             $scope.category = response.data;
         });
     };
     $scope.update = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
-        $http.put('/user/category/' + $scope.category._id, $scope.category, headers).then(function (response) {
+        $http.put('/category/' + $scope.category._id, $scope.category, headers).then(function (response) {
             refresh();
             toastr.info("category updated!");
         });

@@ -29,10 +29,8 @@ app.use('/peex/', function (request, response, next) {
       response.status(401).send('Unauthorized access');
     } else {
       db.collection("users").findOne({ '_id': new MongoId(decoded._id) }, function (error, user) {
-        console.log(decoded);
         if (error) {
-        request.user = decoded;
-          throw error; next();
+          throw error;
         } else {
           if (user) {
             next();
@@ -50,7 +48,7 @@ app.use('/peex/', function (request, response, next) {
 app.post('/login', function (req, res) {
   var user = req.body;
   db.collection('users').findOne({
-    'email': user.email
+    'email': user.email,
   }, function (error, dbUser) {
     if (error) {
       throw error;
@@ -100,8 +98,9 @@ app.post('/register', function (req, res, next) {
       if (err) throw err;
       console.log(result);
       if (result.length > 0) {
-        res.sendStatus(204);
+        console.log(result);
       } else {
+
         db.collection('users').insert(user, function (err, data) {
           if (err) return console.log(err);
           res.setHeader('Content-Type', 'application/json');
@@ -139,21 +138,6 @@ app.post('/users', function (req, res) {
   });
 });
 
-app.get('/users/:id', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  var id = req.params.id;
-  console.log(id);
-  db.listapersona.findOne({
-    _id: mongojs.ObjectId(id),
-  }, function (err, doc) {
-    res.json(doc);
-  });
-});
-
 app.put('/users/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
@@ -161,7 +145,7 @@ app.put('/users/:id', function (req, res) {
     return notAuthorizedRequest(res);
   }
   var id = req.params.id;
-  db.listapersona.findAndModify({
+  db.users.findAndModify({
     query: {
       _id: mongojs.ObjectId(id)
     },
@@ -198,23 +182,10 @@ app.get('/expensesLastList', function (req, res) {
     })
 
 })
-//test
-
-app.get('/user/category', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  db.category.find({ user_id: req.user._id }, function (err, docs) {
-    res.json(docs)
-  })
-});
-
 
 //manage category
 
-app.get('/user/category', function (req, res) {
+app.get('/category', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -225,20 +196,19 @@ app.get('/user/category', function (req, res) {
   })
 });
 
-app.post('/user/category', function (req, res) {
+app.post('/category', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
     return notAuthorizedRequest(res);
   }
   console.log(req.body);
-  req.body.user_id = req.user._id;
   db.category.insert(req.body, function (err, docs) {
     res.send();
   });
 
 });
-app.get('/user/category/:id', function (req, res) {
+app.get('/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -252,7 +222,7 @@ app.get('/user/category/:id', function (req, res) {
     res.json(doc);
   });
 });
-app.put('/user/category/:id', function (req, res) {
+app.put('/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -274,7 +244,7 @@ app.put('/user/category/:id', function (req, res) {
       res.json(doc);
     });
 });
-app.delete('/user/category/:id', function (req, res) {
+app.delete('/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
