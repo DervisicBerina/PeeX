@@ -296,10 +296,13 @@ app.get('/sumExpenses', function (req, res) {
       }
     ]
   ],
-  find(query)(function (err, docs) {
+ (function (err, docs) {
       res.json(docs)
     })
   )
+  db.collection('expenses').find(query).toArray(function (err, docs) {
+   res.json(docs)
+     });
 });
 
 
