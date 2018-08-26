@@ -17,8 +17,8 @@ function expensesCtrl($scope, $http, toastr, AuthenticationService) {
     }
     $scope.loadExpenses = function () {
         var userId = AuthenticationService.getUserId();
-        var headers = { headers: { 'token': AuthenticationService.getToken() } }
-        $http.get('/expenses',userId, headers).then(function (response) {
+        var headers = { headers: { 'token': AuthenticationService.getToken(),'user_id':userId } }
+        $http.get('/expenses', headers).then(function (response) {
             $scope.myExpenses = response.data;
         });
     }

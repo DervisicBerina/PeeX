@@ -1,8 +1,6 @@
 app.service('AuthenticationService', function ($location) {
     this.getToken = function () {
-        var user = localStorage.getItem('user');
-        debugger
-        return user;
+       return localStorage.getItem('user');
     }
     this.getUserId = function () {
         return localStorage.getItem('user_id');
