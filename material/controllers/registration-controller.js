@@ -3,6 +3,7 @@ function RegistrationController($scope, $http, toastr, $location) {
     $http.post('/register', $scope.user).then(function (data) {
       console.log(data.status);
       if (data.status == 202) {
+        console.log("kvakvakva")
         toastr.info("Use another email");
       } else {
         // $scope.users_list = [];
