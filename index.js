@@ -137,32 +137,32 @@ app.post('/users', function (req, res) {
   });
 });
 
-app.put('/users/:id', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
-  }
-  var id = req.params.id;
-  db.users.findAndModify({
-    query: {
-      _id: mongojs.ObjectId(id)
-    },
-    update: {
-      $set: {
-        username: req.body.username,
-        email: req.body.email,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        password: req.body.password
-      }
-    },
-    new: true
-  },
-    function (err, doc) {
-      res.json(doc);
-    });
-});
+// app.put('/users/:id', function (req, res) {
+//   var token = req.headers['token'];
+//   var tokenValid = token !== 'null' && token !== undefined;
+//   if (!tokenValid) {
+//     return notAuthorizedRequest(res);
+//   }
+//   var id = req.params.id;
+//   db.users.findAndModify({
+//     query: {
+//       _id: mongojs.ObjectId(id)
+//     },
+//     update: {
+//       $set: {
+//         username: req.body.username,
+//         email: req.body.email,
+//         firstname: req.body.firstname,
+//         lastname: req.body.lastname,
+//         password: req.body.password
+//       }
+//     },
+//     new: true
+//   },
+//     function (err, doc) {
+//       res.json(doc);
+//     });
+// });
 
 
 app.get('/expensesLastList', function (req, res) {
@@ -221,10 +221,12 @@ app.get('/category/:id', function (req, res) {
     res.json(doc);
   });
 });
-app.put('/category/:id', function (req, res, next) {
-
-
-
+app.put('/users/:id', function (req, res, next) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
   var user = {
     username: req.sanitize('username').escape().trim(),
     email: req.sanitize('email').escape().trim(),
@@ -256,28 +258,28 @@ app.put('/category/:id', function (req, res, next) {
 
 })
 
-// app.put('/category/:id', function (req, res) {
-//   var token = req.headers['token'];
-//   var tokenValid = token !== 'null' && token !== undefined;
-//   if (!tokenValid) {
-//     return notAuthorizedRequest(res);
-//   }
-//   var id = req.params.id;
-//   db.category.findAndModify({
-//     query: {
-//       _id: mongojs.ObjectId(id)
-//     },
-//     update: {
-//       $set: {
-//         category: req.body.category
-//       }
-//     },
-//     new: true
-//   },
-//     function (err, doc) {
-//       res.json(doc);
-//     });
-// });
+app.put('/category/:id', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  var id = req.params.id;
+  db.category.findAndModify({
+    query: {
+      _id: mongojs.ObjectId(id)
+    },
+    update: {
+      $set: {
+        category: req.body.category
+      }
+    },
+    new: true
+  },
+    function (err, doc) {
+      res.json(doc);
+    });
+});
 
 app.delete('/category/:id', function (req, res) {
   var token = req.headers['token'];
