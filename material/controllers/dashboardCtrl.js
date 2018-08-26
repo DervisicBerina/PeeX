@@ -25,8 +25,6 @@ function dashboardCtrl($scope, $http, AuthenticationService){
             $scope.sum = response.data;
         })
         console.log($scope.sum);
-        console.log($scope.sum.total);
-        
     }
     
     
