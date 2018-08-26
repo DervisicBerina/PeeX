@@ -221,28 +221,64 @@ app.get('/category/:id', function (req, res) {
     res.json(doc);
   });
 });
-app.put('/category/:id', function (req, res) {
-  var token = req.headers['token'];
-  var tokenValid = token !== 'null' && token !== undefined;
-  if (!tokenValid) {
-    return notAuthorizedRequest(res);
+app.put('/category/:id', function (req, res, next) {
+
+
+
+  var user = {
+    username: req.sanitize('username').escape().trim(),
+    email: req.sanitize('email').escape().trim(),
+    firstname: req.sanitize('firstname').escape().trim(),
+    lastname: req.sanitize('lastname').escape().trim(),
+    password: req.sanitize('password').escape().trim(),
   }
-  var id = req.params.id;
-  db.category.findAndModify({
-    query: {
-      _id: mongojs.ObjectId(id)
-    },
-    update: {
-      $set: {
-        category: req.body.category
-      }
-    },
-    new: true
-  },
-    function (err, doc) {
-      res.json(doc);
-    });
-});
+
+  var o_id = new ObjectId(req.params.id)
+  req.db.collection('users').update({ "_id": o_id }, user, function (err, result) {
+    if (err) {
+      req.flash('error', err)
+
+      // render to views/user/edit.ejs
+      res.render('dashboard/user', {
+        title: 'Edit User',
+        id: req.params.id,
+        username: req.params.username,
+        email: req.params.email,
+        firstname: req.params.firstname,
+        lastname: req.params.lastname,
+        password: req.params.password,
+      })
+    } else {
+      console.log(success)
+    }
+  })
+
+
+})
+
+// app.put('/category/:id', function (req, res) {
+//   var token = req.headers['token'];
+//   var tokenValid = token !== 'null' && token !== undefined;
+//   if (!tokenValid) {
+//     return notAuthorizedRequest(res);
+//   }
+//   var id = req.params.id;
+//   db.category.findAndModify({
+//     query: {
+//       _id: mongojs.ObjectId(id)
+//     },
+//     update: {
+//       $set: {
+//         category: req.body.category
+//       }
+//     },
+//     new: true
+//   },
+//     function (err, doc) {
+//       res.json(doc);
+//     });
+// });
+
 app.delete('/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
