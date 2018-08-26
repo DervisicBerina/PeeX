@@ -2,10 +2,10 @@ app.service('AuthenticationService', function ($location) {
     this.getToken = function () {
         var user = localStorage.getItem('user');
         debugger
-        return user.token;
+        return user;
     }
     this.getUserId = function () {
-        return localStorage.getItem('user').user_id;
+        return localStorage.getItem('user_id');
     }
     this.isCustomerLogedin = function () {
         if (this.getToken() !== null) {
@@ -20,5 +20,6 @@ app.service('AuthenticationService', function ($location) {
     }
     this.deleteToken = function () {
         localStorage.removeItem('user');
+        localStorage.removeItem('user_id');
     }
 });
