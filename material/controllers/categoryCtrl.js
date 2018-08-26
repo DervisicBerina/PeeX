@@ -1,7 +1,13 @@
 function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     AuthenticationService.guardCustomerAuthenticated();
+
     $scope.categoryList = [];
     $scope.addButtonVisible = false;
+    $scope.categoryName;
+    $scope.newCategory = { category: '' };
+    $scope.submit = true;
+    $scope.editedCategory = { category: '', id: '' };
+
     $scope.hideAddButton = function () {
         $scope.addButtonVisible = false;
     }
@@ -25,10 +31,8 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
         });
     }
     refresh();
-    
-    $scope.categoryName;
-    $scope.newCategory = { category: '' };
-    $scope.submit = true;
+
+
     $scope.submit = function () {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $scope.newCategory.category = $scope.categoryName;
@@ -53,7 +57,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.editCategory = function (id) {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.get('/category/' + id, headers).then(function (response) {
-            $scope.categoryName = response.data;
+            $scope.editedCategory = response.data;
         });
     };
     $scope.update = function () {
@@ -63,5 +67,5 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
             toastr.info("category updated!");
         });
     };
-refresh();
+    refresh();
 }
