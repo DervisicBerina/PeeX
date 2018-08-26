@@ -28,11 +28,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/dashboard/tables.html',
             controller:('expensesCtrl',expensesCtrl)
         })
-        .state('dashboard.user', {
-            url: '/user',
-            templateUrl: 'views/dashboard/user.html',
-            controller: ('editUser',editUser)
-        })
+        // .state('dashboard.user', {
+        //     url: '/user',
+        //     templateUrl: 'views/dashboard/user.html',
+        //     controller: ('editUser',editUser)
+        // })
         // .state('dashboard.recurringExpenses', {
         //     url: '/recurringExpenses',
         //     templateUrl: 'views/dashboard/recurringExpenses.html',
