@@ -100,7 +100,6 @@ app.post('/register', function (req, res, next) {
       if (result.length > 0) {
         res.sendStatus(204);
       } else {
-
         db.collection('users').insert(user, function (err, data) {
           if (err) return console.log(err);
           res.setHeader('Content-Type', 'application/json');

@@ -1,79 +1,68 @@
- <div class="wrapper ">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
-      <div class="logo"></div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item ">
-            <a class="nav-link" href="#!dashboard/charts">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#!dashboard/user">
-              <i class="material-icons">person</i>
-              <p>User Profile</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="#!dashboard/tables">
-              <i class="material-icons">content_paste</i>
-              <p>Expenses List</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-              <a class="nav-link" href="#!dashboard/addExpenses">
-                <i class="material-icons">add</i>
-                <p>Add New Expenses</p>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="#!dashboard/recurringExpenses">
-                <i class="material-icons">R</i>
-                <p>Recurring Expenses</p>
-              </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="#!dashboard/categoryList">
-                  <i class="material-icons">R</i>
-                  <p>Category List</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a class="nav-link" ng-click="logout()">
-                  <i class="material-icons">logout</i>
-                  <p>Log out</p>
-                  
-                </a>
-              </li>
-        </ul>
-       
-      </div>
-    </div>
-    <div class="main-panel">
-      <!-- Navbar Start -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <h3>PERSONAL EXPENSES</h3>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
+<div class="wrapper ">
+  <div class="sidebar" data-color="purple" data-background-color="white" data-image="assets/img/sidebar-1.jpg">
+    <div class="logo"></div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item ">
+          <a class="nav-link" href="#!dashboard/charts">
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="#!dashboard/user">
+            <i class="material-icons">person</i>
+            <p>User Profile</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="#!dashboard/tables">
+            <i class="material-icons">content_paste</i>
+            <p>Expenses List</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="#!dashboard/categoryList">
+            <i class="material-icons">R</i>
+            <p>Category List</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" ng-click="logout()">
+            <i class="material-icons">logout</i>
+            <p>Log out</p>
 
+          </a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+  <div class="main-panel">
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <h3>PERSONAL EXPENSES</h3>
         </div>
-      </nav>
-      <!-- Navbar End -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
 
-      <!-- ui-view -->
-      <div class="content" ui-view></div>
-      <!-- ui-view -->
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- ui-view -->
+    <div class="content" ui-view></div>
+    <!-- ui-view -->
 
 
-    </div>
- </div>
+  </div>
+</div>
