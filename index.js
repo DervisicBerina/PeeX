@@ -28,17 +28,9 @@ app.use('/peex/', function (request, response, next) {
     if (error) {
       response.status(401).send('Unauthorized access');
     } else {
-      db.collection("users").findOne({ '_id': new MongoId(decoded._id) }, function (error, user) {
-        if (error) {
-          throw error;
-        } else {
-          if (user) {
-            next();
-          } else {
-            response.status(401).send('Credentials are wrong.');
-          }
-        }
-      });
+     console.log(decoded);
+     request.user = decoded;
+     next();
     }
   });
 })
@@ -48,7 +40,7 @@ app.use('/peex/', function (request, response, next) {
 app.post('/login', function (req, res) {
   var user = req.body;
   db.collection('users').findOne({
-    'email': user.email,
+    'email': user.email
   }, function (error, dbUser) {
     if (error) {
       throw error;
@@ -196,6 +188,19 @@ app.get('/expensesLastList', function (req, res) {
     })
 
 })
+//test
+
+app.get('/user/category', function (req, res) {
+  var token = req.headers['token'];
+  var tokenValid = token !== 'null' && token !== undefined;
+  if (!tokenValid) {
+    return notAuthorizedRequest(res);
+  }
+  db.category.find({user_id : req.user._id},function (err, docs) {
+    res.json(docs)
+  })
+});
+
 
 //manage category
 
@@ -210,19 +215,20 @@ app.get('/category', function (req, res) {
   })
 });
 
-app.post('/category', function (req, res) {
+app.post('/user/category', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
     return notAuthorizedRequest(res);
   }
   console.log(req.body);
+  req.body.user_id = req.user._id;
   db.category.insert(req.body, function (err, docs) {
     res.send();
   });
 
 });
-app.get('/category/:id', function (req, res) {
+app.get('/user/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -236,7 +242,7 @@ app.get('/category/:id', function (req, res) {
     res.json(doc);
   });
 });
-app.put('/category/:id', function (req, res) {
+app.put('/user/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
