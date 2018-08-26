@@ -272,7 +272,7 @@ app.get('/sumExpenses', function (req, res) {
     [
       {
         $group: {
-          _id: null, 
+          _id: null,
           total: {
             $sum: '$cost'
           }
@@ -281,9 +281,9 @@ app.get('/sumExpenses', function (req, res) {
     ]
   ],
     (function (err, docs) {
-    res.json(docs)
-  })
-)
+      res.json(docs)
+    })
+  )
 });
 
 
@@ -300,14 +300,16 @@ app.post('/expenses', function (req, res) {
 });
 
 app.get('/expenses', function (req, res) {
+  var userId = req.header['user_id'];
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
     return notAuthorizedRequest(res);
   }
-  db.expenses.find(function (err, docs) {
+  db.expenses.find({ 'user_id': userId }, (function (err, docs) {
     res.json(docs)
   })
+  )
 });
 
 var notAuthorizedRequest = function (res) {
