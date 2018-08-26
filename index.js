@@ -28,9 +28,19 @@ app.use('/peex/', function (request, response, next) {
     if (error) {
       response.status(401).send('Unauthorized access');
     } else {
-     console.log(decoded);
-     request.user = decoded;
-     next();
+      db.collection("users").findOne({ '_id': new MongoId(decoded._id) }, function (error, user) {
+        console.log(decoded);
+        if (error) {
+        request.user = decoded;
+          throw error; next();
+        } else {
+          if (user) {
+            next();
+          } else {
+            response.status(401).send('Credentials are wrong.');
+          }
+        }
+      });
     }
   });
 })
@@ -129,7 +139,7 @@ app.post('/users', function (req, res) {
   });
 });
 
-app.get('/users/:id', function(req, res) {
+app.get('/users/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -139,12 +149,12 @@ app.get('/users/:id', function(req, res) {
   console.log(id);
   db.listapersona.findOne({
     _id: mongojs.ObjectId(id),
-  }, function(err, doc) {
+  }, function (err, doc) {
     res.json(doc);
   });
 });
 
-app.put('/users/:id', function(req, res) {
+app.put('/users/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -152,21 +162,21 @@ app.put('/users/:id', function(req, res) {
   }
   var id = req.params.id;
   db.listapersona.findAndModify({
-      query: {
-        _id: mongojs.ObjectId(id)
-      },
-      update: {
-        $set: {
-          username: req.body.username,
-          email: req.body.email,
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          password: req.body.password
-        }
-      },
-      new: true
+    query: {
+      _id: mongojs.ObjectId(id)
     },
-    function(err, doc) {
+    update: {
+      $set: {
+        username: req.body.username,
+        email: req.body.email,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        password: req.body.password
+      }
+    },
+    new: true
+  },
+    function (err, doc) {
       res.json(doc);
     });
 });
@@ -196,7 +206,7 @@ app.get('/user/category', function (req, res) {
   if (!tokenValid) {
     return notAuthorizedRequest(res);
   }
-  db.category.find({user_id : req.user._id},function (err, docs) {
+  db.category.find({ user_id: req.user._id }, function (err, docs) {
     res.json(docs)
   })
 });
