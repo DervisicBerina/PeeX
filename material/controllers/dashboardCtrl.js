@@ -2,7 +2,7 @@ function dashboardCtrl($scope, $http, AuthenticationService){
     AuthenticationService.guardCustomerAuthenticated();
     $scope.myExpenses = [];
     $scope.expense;
-    $scope.sum = 0;
+  
     console.log("Initializing dashboard");
 //     <script>
 //     $(document).ready(function() {
@@ -22,9 +22,9 @@ function dashboardCtrl($scope, $http, AuthenticationService){
 
         });
         $http.get('/sumExpenses',headers).then(function(response){
-            $scope.sum = response.data;
+            $scope.sum = response.data.total;
         })
-        console.log($scope.sum);
+       
     }
     
     
