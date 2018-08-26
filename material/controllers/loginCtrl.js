@@ -8,7 +8,7 @@ function loginCtrl($scope, $http, toastr, $location) {
     $scope.login = function (credentials) {
         $http.post('/login', credentials).then(function (response) {
             if (typeof response.data.token != 'undefined') {
-                localStorage.setItem('user', response.data.token);
+                localStorage.setItem('user', response.data);
                 $location.url('dashboard/charts');
 
             }

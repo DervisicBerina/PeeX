@@ -39,7 +39,7 @@ function expensesCtrl($scope, $http, toastr, AuthenticationService) {
     }
     $scope.add = function () {
         $scope.expense.type = $scope.selectedCategory.category;
-        $scope.expense.user_id = '5b75a69918cbf48fecc49d99';
+        $scope.expense.user_id = AuthenticationService.getUserId();
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.post('/expenses', $scope.expense, headers).then(function successCallback(response) {
             $scope.expense = {};

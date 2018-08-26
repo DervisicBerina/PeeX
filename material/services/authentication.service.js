@@ -1,6 +1,9 @@
 app.service('AuthenticationService', function ($location) {
     this.getToken = function () {
-        return localStorage.getItem('user');
+        return localStorage.getItem('user').token;
+    }
+    this.getUserId = function () {
+        return localStorage.getItem('user').user_id;
     }
     this.isCustomerLogedin = function () {
         if (this.getToken() !== null) {
@@ -8,12 +11,12 @@ app.service('AuthenticationService', function ($location) {
         }
         return false;
     }
-    this.guardCustomerAuthenticated = function(){
+    this.guardCustomerAuthenticated = function () {
         if (!this.isCustomerLogedin()) {
             $location.url('/login');
         }
     }
-    this.deleteToken = function(){
+    this.deleteToken = function () {
         localStorage.removeItem('user');
     }
 });
