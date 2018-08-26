@@ -204,7 +204,7 @@ app.get('/user/category', function (req, res) {
 
 //manage category
 
-app.get('/category', function (req, res) {
+app.get('/user/category', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
@@ -264,7 +264,7 @@ app.put('/user/category/:id', function (req, res) {
       res.json(doc);
     });
 });
-app.delete('/category/:id', function (req, res) {
+app.delete('/user/category/:id', function (req, res) {
   var token = req.headers['token'];
   var tokenValid = token !== 'null' && token !== undefined;
   if (!tokenValid) {
