@@ -53,7 +53,7 @@ function categoryCtrl($scope, $http, toastr, AuthenticationService) {
     $scope.editCategory = function (id) {
         var headers = { headers: { 'token': AuthenticationService.getToken() } }
         $http.get('/category/' + id, headers).then(function (response) {
-            $scope.category = response.data;
+            $scope.categoryName = response.data;
         });
     };
     $scope.update = function () {
