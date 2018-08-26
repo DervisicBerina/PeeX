@@ -33,16 +33,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/dashboard/user.html',
             controller: ('editUser',editUser)
         })
-        .state('dashboard.recurringExpenses', {
-            url: '/recurringExpenses',
-            templateUrl: 'views/dashboard/recurringExpenses.html',
-            controller: ('expensesCtrl',expensesCtrl)
-        })
-        .state('dashboard.addExpenses', {
-            url: '/addExpenses',
-            templateUrl: 'views/dashboard/addExpenses.html',
-           controller: ('addExpensesCtrl',addExpensesCtrl)
-        })
+        // .state('dashboard.recurringExpenses', {
+        //     url: '/recurringExpenses',
+        //     templateUrl: 'views/dashboard/recurringExpenses.html',
+        //     controller: ('expensesCtrl',expensesCtrl)
+        // })
+        // .state('dashboard.addExpenses', {
+        //     url: '/addExpenses',
+        //     templateUrl: 'views/dashboard/addExpenses.html',
+        //    controller: ('addExpensesCtrl',addExpensesCtrl)
+        // })
         .state('dashboard.categoryList', {
             url: '/categoryList',
             templateUrl: 'views/dashboard/categoryList.html',
